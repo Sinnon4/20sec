@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 //using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using UnityEngine.SceneManagement;
 
 public class RoomHandler : MonoBehaviour
@@ -16,6 +17,7 @@ public class RoomHandler : MonoBehaviour
     public List<GameObject> doors = new List<GameObject>();
     [SerializeField][Range(6, 12)] int maxRoomWidth;
     [SerializeField][Range(6, 12)] int maxRoomHeight;
+    [SerializeField] public int gridSize = 1; //Need to adjust for room dimensions if altered
 
     int roomX;
     int roomY;
@@ -41,11 +43,17 @@ public class RoomHandler : MonoBehaviour
         startRoom = gameObject;
         rooms.Add(startRoom);
 
-        roomX = Random.Range(-2, 3); //accounts for max exclusive
-        roomY = Random.Range(-2, 3); //accounts for max exclusive
+        //set the room position as somewhere from -1 to 1 (default room size is 5x5 - so any more would lead to spawning next to the wall)
+        roomX = Random.Range(-1, 2); //accounts for max exclusive
+        roomY = Random.Range(-1, 2); //accounts for max exclusive
         startRoom.transform.position = new Vector2(roomX, roomY);
-        roomWidth = 5 + Random.Range(0, maxRoomWidth / 2 + 1) * 2; //+1 due to function being max exclusive, /2*2 due to grid needing to be on an odd number to align with player
-        roomHeight = 5 + Random.Range(0, maxRoomHeight / 2 + 1) * 2; //+1 due to function being max exclusive, /2*2 due to grid needing to be on an odd number to align with player
+
+        /*set the room size, using 5 as the minimum width and height.
+         * random value (int) is multiplied by 2 so that the result is an even number, then adding to 5 will always give an odd number, so that this always aligns with the player grid.
+         * uses +1 on second parameter due to max exclusive.
+         */
+        roomWidth = 5 + Random.Range(0, maxRoomWidth / 2 + 1) * 2;
+        roomHeight = 5 + Random.Range(0, maxRoomHeight / 2 + 1) * 2;
         startRoom.transform.localScale = new Vector3(roomWidth, roomHeight, 0);
 
         activeBorder1 = new Vector2(startRoom.transform.position.x - (float)roomWidth / 2, startRoom.transform.position.y + (float)roomHeight / 2); //top left border
@@ -58,15 +66,19 @@ public class RoomHandler : MonoBehaviour
     private void Start()
     {
         spawnRooms();
+        updateDoors();
 
         //spawn star in random location
         int randRoom = Random.Range(1, rooms.Count);
-        print(randRoom);
-        int randPosX = (int)Random.Range(roomBorders[randRoom][0] + 1, roomBorders[randRoom][2]); //STILL NOT FIXED
-        int randPosY = (int)Random.Range(roomBorders[randRoom][3] + 1, roomBorders[randRoom][1]);
+        int randPosX = Random.Range((int)(roomBorders[randRoom][0] + 0.5f), (int)(roomBorders[randRoom][2] + 0.5f)); //uses +0.5f on second parameter as it is maxExlusive
+        int randPosY = Random.Range((int)(roomBorders[randRoom][3] + 0.5f), (int)(roomBorders[randRoom][1] + 0.5f));
         starPos = new Vector2(randPosX, randPosY);
-        print($"x bounds: {roomBorders[randRoom][0]} {roomBorders[randRoom][2]}");
-        star = Instantiate(star, starPos, Quaternion.identity); //look into bug - spawns in startRoom and also spawns outside of bounds of other rooms entirely
+        star = Instantiate(star, starPos, Quaternion.identity);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.R)) { SceneManager.LoadScene(0); }
     }
 
     private void spawnRooms()
@@ -126,6 +138,7 @@ public class RoomHandler : MonoBehaviour
 
     public void updateActiveRoom(Vector2 pos)
     {
+        //check each rooms borders to see which room the player is in and then activate that room and reactivate the previous one
         for (int i = 0; i < rooms.Count; i++)
         {
             if (pos.x > roomBorders[i][0] && pos.x < roomBorders[i][2] &&
@@ -139,11 +152,25 @@ public class RoomHandler : MonoBehaviour
 
         activeBorder1 = new Vector2(roomBorders[roomNo][0], roomBorders[roomNo][1]);
         activeBorder2 = new Vector2(roomBorders[roomNo][2], roomBorders[roomNo][3]);
+
+        updateDoors();
+    }
+
+    void updateDoors()
+    {
+        //hide all doors outside of the active room
+        foreach (GameObject door in doors)
+        {
+            if (door.transform.position.x >= activeBorder1.x && door.transform.position.x <= activeBorder2.x &&
+                door.transform.position.y <= activeBorder1.y && door.transform.position.y >= activeBorder2.y)
+            { door.GetComponent<SpriteRenderer>().color = Color.brown; }
+            else { door.GetComponent<SpriteRenderer>().color = Color.black; }
+        }
     }
 
     public void WinGame()
     {
-        print("<color><yellow>Woohoo!");
+        print("<color=yellow>Woohoo!");
         Destroy(player);
     }
 }

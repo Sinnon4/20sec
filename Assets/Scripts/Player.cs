@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
-using System.Xml.Linq;
-using UnityEditor;
+//using Unity.VisualScripting;
+//using System.Xml.Linq;
+//using UnityEditor;
 
 public class Player : MonoBehaviour
 {
-    GameManager gameManager;
     RoomHandler roomHandler;
 
     [SerializeField] private float moveDuration = 0.5f;
@@ -15,7 +14,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        gameManager = FindAnyObjectByType<GameManager>();
         roomHandler = FindAnyObjectByType<RoomHandler>();
     }
 
@@ -48,7 +46,7 @@ public class Player : MonoBehaviour
     private IEnumerator Move(Vector2 direction)
     {
         Vector2 startPosition = transform.position;
-        Vector2 endPosition = startPosition + (direction * gameManager.gridSize);
+        Vector2 endPosition = startPosition + (direction * roomHandler.gridSize);
 
         float xMid = (endPosition.x + startPosition.x) / 2;
         float yMid = (endPosition.y + startPosition.y) / 2;

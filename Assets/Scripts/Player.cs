@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveDuration = 0.5f;
     bool isMoving = false;
 
-    //[SerializeField] Transform FOV;
     [SerializeField] Transform torch;
+    [SerializeField] float rotateTime;
 
     private void Awake()
     {
@@ -27,26 +27,22 @@ public class Player : MonoBehaviour
 
             if (inputFunction(KeyCode.UpArrow) || inputFunction(KeyCode.W))
             {
-                //FOV.transform.eulerAngles = new Vector3 (0,0,90);
-                torch.transform.eulerAngles = new Vector3(0, 0, 0);
+                LeanTween.rotateZ(torch.gameObject, 0, rotateTime);
                 StartCoroutine(Move(Vector2.up));
             }
             else if (inputFunction(KeyCode.DownArrow) || inputFunction(KeyCode.S))
             {
-                //FOV.transform.eulerAngles = new Vector3(0, 0, -90);
-                torch.transform.eulerAngles = new Vector3(0, 0, 180);
+                LeanTween.rotateZ(torch.gameObject, 180, rotateTime);
                 StartCoroutine(Move(Vector2.down));
             }
             else if (inputFunction(KeyCode.LeftArrow) || inputFunction(KeyCode.A))
             {
-                //FOV.transform.eulerAngles = new Vector3(0, 0, 180);
-                torch.transform.eulerAngles = new Vector3(0, 0, 90);
+                LeanTween.rotateZ(torch.gameObject, 90, rotateTime);
                 StartCoroutine(Move(Vector2.left));
             }
             else if (inputFunction(KeyCode.RightArrow) || inputFunction(KeyCode.D))
             {
-                //FOV.transform.eulerAngles = new Vector3(0, 0, 0);
-                torch.transform.eulerAngles = new Vector3(0, 0, -90);
+                LeanTween.rotateZ(torch.gameObject, -90, rotateTime);
                 StartCoroutine(Move(Vector2.right));
             }
         }

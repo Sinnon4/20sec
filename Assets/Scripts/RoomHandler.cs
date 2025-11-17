@@ -6,6 +6,7 @@ public class RoomHandler : MonoBehaviour
 {
     public static RoomHandler instance;
     Player player;
+    Countdown timer;
 
     [Header("Level Options")]
     [SerializeField] public bool enableFOV;
@@ -36,6 +37,7 @@ public class RoomHandler : MonoBehaviour
     int starRoom;
     SpriteRenderer starSR;
     [SerializeField] GameObject winText;
+    [SerializeField] GameObject loseText;
 
     [SerializeField] GameObject background;
 
@@ -44,10 +46,12 @@ public class RoomHandler : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-
+        print("need to implement back wall pokemon style");
         player = FindAnyObjectByType<Player>();
+        timer = FindAnyObjectByType<Countdown>();
 
         winText.SetActive(false);
+        loseText.SetActive(false);
 
         startRoom = gameObject;
         rooms.Add(startRoom);
@@ -92,7 +96,7 @@ public class RoomHandler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.R)) { SceneManager.LoadScene(0); }
+        if (Input.GetKeyUp(KeyCode.R)) { SceneManager.LoadScene(1); }
     }
 
     private void spawnRooms()
@@ -189,6 +193,15 @@ public class RoomHandler : MonoBehaviour
     {
         print("<color=yellow>Woohoo!");
         winText.SetActive(true);
+        Destroy(timer);
+        Destroy(player);
+    }
+
+    public void LoseGame()
+    {
+        print("<color=red>Loser...");
+        loseText.SetActive(true);
+        Destroy(timer);
         Destroy(player);
     }
 }

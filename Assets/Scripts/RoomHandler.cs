@@ -1,19 +1,21 @@
 using System.Collections.Generic;
-//using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using UnityEngine.SceneManagement;
 
 public class RoomHandler : MonoBehaviour
 {
     public static RoomHandler instance;
     Player player;
 
-    GameObject startRoom;
-    public GameObject activeRoom;
+    [Header("Level Options")]
+    [SerializeField] public bool enableFOV;
+
+    [Header("Rooms")]
     [SerializeField] GameObject room;
     [SerializeField] GameObject door;
-    public List<GameObject> rooms = new List<GameObject>();
+    GameObject startRoom;
+    GameObject activeRoom;
+    List<GameObject> rooms = new List<GameObject>();
     public List<GameObject> doors = new List<GameObject>();
     [SerializeField][Range(6, 12)] int maxRoomWidth;
     [SerializeField][Range(6, 12)] int maxRoomHeight;
@@ -31,6 +33,11 @@ public class RoomHandler : MonoBehaviour
 
     [SerializeField] GameObject star;
     public Vector2 starPos;
+    int starRoom;
+    SpriteRenderer starSR;
+    [SerializeField] GameObject winText;
+
+    [SerializeField] GameObject background;
 
     // rooms and roomBorders lists will have one more than doors list as they include startRoom
 
@@ -39,6 +46,8 @@ public class RoomHandler : MonoBehaviour
         if (instance == null) instance = this;
 
         player = FindAnyObjectByType<Player>();
+
+        winText.SetActive(false);
 
         startRoom = gameObject;
         rooms.Add(startRoom);
@@ -61,6 +70,8 @@ public class RoomHandler : MonoBehaviour
         roomBorders.Add(new Vector4(activeBorder1.x, activeBorder1.y, activeBorder2.x, activeBorder2.y));
         
         activeRoom = startRoom;
+
+        if (enableFOV) background.SetActive(true);
     }
 
     private void Start()
@@ -74,6 +85,9 @@ public class RoomHandler : MonoBehaviour
         int randPosY = Random.Range((int)(roomBorders[randRoom][3] + 0.5f), (int)(roomBorders[randRoom][1] + 0.5f));
         starPos = new Vector2(randPosX, randPosY);
         star = Instantiate(star, starPos, Quaternion.identity);
+        starSR = star.GetComponent<SpriteRenderer>();
+        starSR.enabled = false; //hide star (in other room) on spawn
+        starRoom = randRoom;
     }
 
     void Update()
@@ -153,6 +167,9 @@ public class RoomHandler : MonoBehaviour
         activeBorder1 = new Vector2(roomBorders[roomNo][0], roomBorders[roomNo][1]);
         activeBorder2 = new Vector2(roomBorders[roomNo][2], roomBorders[roomNo][3]);
 
+        if (roomNo == starRoom) starSR.enabled = true;
+        else starSR.enabled = false;
+
         updateDoors();
     }
 
@@ -171,6 +188,7 @@ public class RoomHandler : MonoBehaviour
     public void WinGame()
     {
         print("<color=yellow>Woohoo!");
+        winText.SetActive(true);
         Destroy(player);
     }
 }

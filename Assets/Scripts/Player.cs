@@ -1,20 +1,21 @@
 using UnityEngine;
 using System.Collections;
-//using Unity.VisualScripting;
-//using System.Xml.Linq;
-//using UnityEditor;
 
 public class Player : MonoBehaviour
 {
     RoomHandler roomHandler;
 
     [SerializeField] private float moveDuration = 0.5f;
-
     bool isMoving = false;
+
+    //[SerializeField] Transform FOV;
+    [SerializeField] Transform torch;
 
     private void Awake()
     {
         roomHandler = FindAnyObjectByType<RoomHandler>();
+
+        if (roomHandler.enableFOV) torch.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -26,18 +27,26 @@ public class Player : MonoBehaviour
 
             if (inputFunction(KeyCode.UpArrow) || inputFunction(KeyCode.W))
             {
+                //FOV.transform.eulerAngles = new Vector3 (0,0,90);
+                torch.transform.eulerAngles = new Vector3(0, 0, 0);
                 StartCoroutine(Move(Vector2.up));
             }
             else if (inputFunction(KeyCode.DownArrow) || inputFunction(KeyCode.S))
             {
+                //FOV.transform.eulerAngles = new Vector3(0, 0, -90);
+                torch.transform.eulerAngles = new Vector3(0, 0, 180);
                 StartCoroutine(Move(Vector2.down));
             }
             else if (inputFunction(KeyCode.LeftArrow) || inputFunction(KeyCode.A))
             {
+                //FOV.transform.eulerAngles = new Vector3(0, 0, 180);
+                torch.transform.eulerAngles = new Vector3(0, 0, 90);
                 StartCoroutine(Move(Vector2.left));
             }
             else if (inputFunction(KeyCode.RightArrow) || inputFunction(KeyCode.D))
             {
+                //FOV.transform.eulerAngles = new Vector3(0, 0, 0);
+                torch.transform.eulerAngles = new Vector3(0, 0, -90);
                 StartCoroutine(Move(Vector2.right));
             }
         }

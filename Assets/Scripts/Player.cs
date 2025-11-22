@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour
 {
@@ -7,20 +8,23 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float moveDuration = 0.5f;
     bool isMoving = false;
-
-    [SerializeField] Transform torch;
+    bool pass;
+    int doorNo;
+    
+    Light2D torch;
     [SerializeField] float rotateTime;
 
     private void Awake()
     {
         roomHandler = FindAnyObjectByType<RoomHandler>();
 
-        if (roomHandler.enableFOV) torch.gameObject.SetActive(true);
+        torch = GetComponentInChildren<Light2D>();
+        if (roomHandler.enableFOV) torch.enabled = true;
     }
 
     private void Update()
     {
-        if (!isMoving)
+        if (!isMoving && !roomHandler.pendingRound)
         {
             System.Func<KeyCode, bool> inputFunction;
             inputFunction = Input.GetKey;
@@ -50,20 +54,17 @@ public class Player : MonoBehaviour
 
     private IEnumerator Move(Vector2 direction)
     {
+        pass = false;
+
         Vector2 startPosition = transform.position;
-        Vector2 endPosition = startPosition + (direction * roomHandler.gridSize);
+        Vector2 endPosition = startPosition + direction; //assumed grid size is 1 [otherwise, use (direction * gridSize) ]
 
-        float xMid = (endPosition.x + startPosition.x) / 2;
-        float yMid = (endPosition.y + startPosition.y) / 2;
-
-        //check for walls and door positions
-        if (xMid == roomHandler.activeBorder1.x || xMid == roomHandler.activeBorder2.x ||
-            yMid == roomHandler.activeBorder1.y || yMid == roomHandler.activeBorder2.y)
+        if (endPosition.x < roomHandler.activeBorder1.x || endPosition.x > roomHandler.activeBorder2.x ||
+            endPosition.y > roomHandler.activeBorder1.y || endPosition.y < roomHandler.activeBorder2.y)
         {
-            bool pass = false;
-            foreach (GameObject door in roomHandler.doors)
+            for (int i = 0; i < roomHandler.doors.Count; i++)
             {
-                if (door.transform.position == new Vector3(xMid, yMid, door.transform.position.z)) { pass = true; roomHandler.updateActiveRoom(endPosition); }
+                if (roomHandler.doors[i].transform.position == new Vector3(endPosition.x, endPosition.y, roomHandler.doors[i].transform.position.z)) { pass = true; doorNo = i; }
             }
             if (!pass) yield break; //exit coroutine if the endPos is on a border and no door there
         }
@@ -81,7 +82,18 @@ public class Player : MonoBehaviour
 
         transform.position = endPosition;
 
-        if (endPosition == roomHandler.starPos) { roomHandler.WinGame(); }
+        if (pass == true)
+        {
+            DoorPath dp = roomHandler.doors[doorNo].GetComponent<DoorPath>();
+            if (dp.destination == null) { print("<color=yellow>Locked! :O"); transform.position = startPosition; }
+            else if (dp.xDir == 1) transform.position = dp.destination.transform.position + Vector3.right;
+            else if (dp.xDir == -1) transform.position = dp.destination.transform.position + Vector3.left;
+            else if (dp.yDir == 1) transform.position = dp.destination.transform.position + Vector3.up;
+            else if (dp.yDir == -1) transform.position = dp.destination.transform.position + Vector3.down;
+
+            roomHandler.updateActiveRoom(transform.position);
+        }
+        else if (endPosition == roomHandler.cowPos) { roomHandler.WinGame(); }
 
         isMoving = false;
     }

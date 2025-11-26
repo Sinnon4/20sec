@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEditor.AnimatedValues;
+using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class Player : MonoBehaviour
@@ -14,45 +15,60 @@ public class Player : MonoBehaviour
     Light2D torch;
     [SerializeField] float rotateTime;
 
+    public bool hasCow = false;
+
+    Animator anim;
+
     private void Awake()
     {
         roomHandler = FindAnyObjectByType<RoomHandler>();
 
         torch = GetComponentInChildren<Light2D>();
         if (roomHandler.enableFOV) torch.enabled = true;
+
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
         if (!isMoving && !roomHandler.pendingRound)
         {
+            anim.SetBool("upCheck", false);
+            anim.SetBool("downCheck", false);
+            anim.SetBool("leftCheck", false);
+            anim.SetBool("rightCheck", false);
+
             System.Func<KeyCode, bool> inputFunction;
             inputFunction = Input.GetKey;
 
             if (inputFunction(KeyCode.UpArrow) || inputFunction(KeyCode.W))
             {
+                //LeanTween.rotateZ(gameObject, 0, rotateTime);
                 LeanTween.rotateZ(torch.gameObject, 0, rotateTime);
-                StartCoroutine(Move(Vector2.up));
+                StartCoroutine(Move(Vector2.up, "upCheck"));
             }
             else if (inputFunction(KeyCode.DownArrow) || inputFunction(KeyCode.S))
             {
+                //LeanTween.rotateZ(gameObject, 180, rotateTime);
                 LeanTween.rotateZ(torch.gameObject, 180, rotateTime);
-                StartCoroutine(Move(Vector2.down));
+                StartCoroutine(Move(Vector2.down, "downCheck"));
             }
             else if (inputFunction(KeyCode.LeftArrow) || inputFunction(KeyCode.A))
             {
+                //LeanTween.rotateZ(gameObject, 90, rotateTime);
                 LeanTween.rotateZ(torch.gameObject, 90, rotateTime);
-                StartCoroutine(Move(Vector2.left));
+                StartCoroutine(Move(Vector2.left, "leftCheck"));
             }
             else if (inputFunction(KeyCode.RightArrow) || inputFunction(KeyCode.D))
             {
+                //LeanTween.rotateZ(gameObject, -90, rotateTime);
                 LeanTween.rotateZ(torch.gameObject, -90, rotateTime);
-                StartCoroutine(Move(Vector2.right));
+                StartCoroutine(Move(Vector2.right, "rightCheck"));
             }
         }
     }
 
-    private IEnumerator Move(Vector2 direction)
+    private IEnumerator Move(Vector2 direction, string animBool)
     {
         pass = false;
 
@@ -69,7 +85,13 @@ public class Player : MonoBehaviour
             if (!pass) yield break; //exit coroutine if the endPos is on a border and no door there
         }
 
+        foreach (GameObject item_ in roomHandler.items)
+        {
+            if (endPosition == (Vector2)item_.transform.position) yield break; //exit coroutine if item is in the endPos
+        }
+
         isMoving = true;
+        anim.SetBool(animBool, true);
 
         float elapsedTime = 0;
         while (elapsedTime < moveDuration)
@@ -93,7 +115,7 @@ public class Player : MonoBehaviour
 
             roomHandler.updateActiveRoom(transform.position);
         }
-        else if (endPosition == roomHandler.cowPos) { roomHandler.WinGame(); }
+        else if (endPosition == roomHandler.cowPos) { roomHandler.grabCow(); }
 
         isMoving = false;
     }

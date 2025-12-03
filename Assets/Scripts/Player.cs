@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -7,31 +6,45 @@ public class Player : MonoBehaviour
 {
     RoomHandler roomHandler;
 
-    [SerializeField] private float moveDuration = 0.5f;
+    [SerializeField] float speed = 1;
+    float moveDuration;
     bool isMoving = false;
     bool pass;
     int doorNo;
-    
-    Light2D torch;
+
+    [SerializeField] public Transform hand;
+    [SerializeField] GameObject torch;
+    public Light2D torchLight;
+    float torchPos;
     [SerializeField] float rotateTime;
+    bool torchDied;
 
     public bool hasCow = false;
 
-    Animator anim;
+    public Animator anim;
+
+    [Header("Sounds")]
+    [SerializeField] AudioClip openDoorClip;
+    [SerializeField] AudioClip
+        backyardMovementClip,
+        movementClip,
+        torchOffClip;
+    public AudioSource source;
 
     private void Awake()
     {
         roomHandler = FindAnyObjectByType<RoomHandler>();
-
-        torch = GetComponentInChildren<Light2D>();
-        if (roomHandler.enableFOV) torch.enabled = true;
+        print("add death animation");
+        torchLight = torch.GetComponentInChildren<Light2D>();
+        torchPos = torch.transform.localPosition.x;
 
         anim = GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        if (!isMoving && !roomHandler.pendingRound)
+        if (!isMoving && roomHandler.started && !roomHandler.pendingRound)
         {
             anim.SetBool("upCheck", false);
             anim.SetBool("downCheck", false);
@@ -43,26 +56,26 @@ public class Player : MonoBehaviour
 
             if (inputFunction(KeyCode.UpArrow) || inputFunction(KeyCode.W))
             {
-                //LeanTween.rotateZ(gameObject, 0, rotateTime);
-                LeanTween.rotateZ(torch.gameObject, 0, rotateTime);
+                LeanTween.rotateZ(hand.gameObject, 0, rotateTime);
+                LeanTween.moveLocalX(torch, torchPos, rotateTime);
                 StartCoroutine(Move(Vector2.up, "upCheck"));
             }
             else if (inputFunction(KeyCode.DownArrow) || inputFunction(KeyCode.S))
             {
-                //LeanTween.rotateZ(gameObject, 180, rotateTime);
-                LeanTween.rotateZ(torch.gameObject, 180, rotateTime);
+                LeanTween.rotateZ(hand.gameObject, 180, rotateTime);
+                LeanTween.moveLocalX(torch, torchPos, rotateTime);
                 StartCoroutine(Move(Vector2.down, "downCheck"));
             }
             else if (inputFunction(KeyCode.LeftArrow) || inputFunction(KeyCode.A))
             {
-                //LeanTween.rotateZ(gameObject, 90, rotateTime);
-                LeanTween.rotateZ(torch.gameObject, 90, rotateTime);
+                LeanTween.rotateZ(hand.gameObject, 90, rotateTime);
+                LeanTween.moveLocalX(torch, -0.15f, rotateTime);
                 StartCoroutine(Move(Vector2.left, "leftCheck"));
             }
             else if (inputFunction(KeyCode.RightArrow) || inputFunction(KeyCode.D))
             {
-                //LeanTween.rotateZ(gameObject, -90, rotateTime);
-                LeanTween.rotateZ(torch.gameObject, -90, rotateTime);
+                LeanTween.rotateZ(hand.gameObject, -90, rotateTime);
+                LeanTween.moveLocalX(torch, 0.15f, rotateTime);
                 StartCoroutine(Move(Vector2.right, "rightCheck"));
             }
         }
@@ -75,8 +88,7 @@ public class Player : MonoBehaviour
         Vector2 startPosition = transform.position;
         Vector2 endPosition = startPosition + direction; //assumed grid size is 1 [otherwise, use (direction * gridSize) ]
 
-        if (endPosition.x < roomHandler.activeBorder1.x || endPosition.x > roomHandler.activeBorder2.x ||
-            endPosition.y > roomHandler.activeBorder1.y || endPosition.y < roomHandler.activeBorder2.y)
+        if (!roomHandler.isWithinRoom(endPosition, roomHandler.activeRoom))
         {
             for (int i = 0; i < roomHandler.doors.Count; i++)
             {
@@ -92,8 +104,10 @@ public class Player : MonoBehaviour
 
         isMoving = true;
         anim.SetBool(animBool, true);
+        SoundManager.instance.PlayClip(movementClip, source, true);
 
         float elapsedTime = 0;
+        moveDuration = 1 / speed;
         while (elapsedTime < moveDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -106,6 +120,8 @@ public class Player : MonoBehaviour
 
         if (pass == true)
         {
+            //SoundManager.instance.PlayClip(openDoorClip, source);
+
             DoorPath dp = roomHandler.doors[doorNo].GetComponent<DoorPath>();
             if (dp.destination == null) { print("<color=yellow>Locked! :O"); transform.position = startPosition; }
             else if (dp.xDir == 1) transform.position = dp.destination.transform.position + Vector3.right;
@@ -115,8 +131,75 @@ public class Player : MonoBehaviour
 
             roomHandler.updateActiveRoom(transform.position);
         }
-        else if (endPosition == roomHandler.cowPos) { roomHandler.grabCow(); }
+        else if (endPosition == roomHandler.cowPos)
+        {
+            if (torchDied)
+            {
+                torchLight.enabled = true;
+                torchDied = false;
+                Human.instance.speed++;
+            }
+            roomHandler.grabCow();
+        }
+        
+        //if (endPosition == (Vector2)roomHandler.activeSwitch.transform.position)
+        //{
+        //    torchOff();
+        //    //DialogueHandler.instance.insertText()
+        //}
 
         isMoving = false;
+        source.Stop(); //check if messes with opening door sound
+    }
+
+    public void torchOff()
+    {
+        torchDied = true;
+        StartCoroutine(flickerTorch());
+        Human.instance.speed--;
+    }
+
+    IEnumerator flickerTorch()
+    {
+        torchLight.enabled = false;
+        float sec;
+
+        sec = Random.Range(0.2f, 0.5f);
+        yield return new WaitForSeconds(sec);
+        torchLight.enabled = true;
+
+        sec = Random.Range(0.4f, 0.7f);
+        yield return new WaitForSeconds(sec);
+        torchLight.enabled = false;
+
+        sec = Random.Range(0.5f, 0.8f);
+        yield return new WaitForSeconds(sec);
+        torchLight.enabled = true;
+
+        sec = Random.Range(0.1f, 0.4f);
+        yield return new WaitForSeconds(sec);
+        torchLight.enabled = false;
+
+        sec = Random.Range(0.2f, 0.3f);
+        yield return new WaitForSeconds(sec);
+        torchLight.enabled = true;
+
+        sec = Random.Range(0.1f, 0.2f);
+        yield return new WaitForSeconds(sec);
+        torchLight.enabled = false;
+
+        yield return null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == roomHandler.human)
+        {
+            if (roomHandler.enableDeath)
+            {
+                source.Stop();
+                roomHandler.LoseGame();
+            }
+        }
     }
 }

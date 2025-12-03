@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomTiles : MonoBehaviour
 {
     [SerializeField] public GameObject base_;
+    public List<GameObject> tiles = new();
     [SerializeField] public GameObject[] door;
     [SerializeField] public Sprite
         topLeft, top, topRight,
@@ -11,6 +13,11 @@ public class RoomTiles : MonoBehaviour
         wall;
 
     int newX, newY;
+
+    private void Awake()
+    {
+        tiles.Add(base_);
+    }
 
     public Vector4 randomiseSize(int x, int y)
     {
@@ -23,8 +30,8 @@ public class RoomTiles : MonoBehaviour
                 {
                     newX = (int)gameObject.transform.position.x + i;
                     newY = (int)gameObject.transform.position.y - j; //use minus as y is going down from top left
-                    SpriteRenderer tile = Instantiate(base_, new Vector2(newX, newY), Quaternion.identity, gameObject.transform).GetComponent<SpriteRenderer>();
-
+                    tiles.Add(Instantiate(base_, new Vector2(newX, newY), Quaternion.identity, gameObject.transform));
+                    SpriteRenderer tile = tiles[tiles.Count - 1].GetComponent<SpriteRenderer>();
                     //update sprites as per position in room - noting top left already accounted for
                     if      (              j == -1   )  { tile.sprite = wall;           tile.name = "Wall"; }
                     else if (i == x - 1 && j == 0    )  { tile.sprite = topRight;       tile.name = "TopRight"; }

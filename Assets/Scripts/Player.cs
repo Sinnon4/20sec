@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -12,12 +13,13 @@ public class Player : MonoBehaviour
     bool pass;
     int doorNo;
 
-    [SerializeField] public Transform hand;
+    [SerializeField] public GameObject hand;
     [SerializeField] GameObject torch;
     public Light2D torchLight;
-    float torchPos;
+    Vector3 torchPos;
     [SerializeField] float rotateTime;
-    bool torchDied;
+    //bool torchDied;
+    //float intensity;
 
     public bool hasCow = false;
 
@@ -26,8 +28,8 @@ public class Player : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] AudioClip openDoorClip;
     [SerializeField] AudioClip
-        backyardMovementClip,
-        movementClip,
+        movementOutsideClip,
+        movementInsideClip,
         torchOffClip;
     public AudioSource source;
 
@@ -36,7 +38,8 @@ public class Player : MonoBehaviour
         roomHandler = FindAnyObjectByType<RoomHandler>();
         print("add death animation");
         torchLight = torch.GetComponentInChildren<Light2D>();
-        torchPos = torch.transform.localPosition.x;
+        torchPos = torch.transform.localPosition;
+        //intensity = torchLight.intensity;
 
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
@@ -56,26 +59,26 @@ public class Player : MonoBehaviour
 
             if (inputFunction(KeyCode.UpArrow) || inputFunction(KeyCode.W))
             {
-                LeanTween.rotateZ(hand.gameObject, 0, rotateTime);
-                LeanTween.moveLocalX(torch, torchPos, rotateTime);
+                LeanTween.rotateZ(hand, 0, rotateTime);
+                LeanTween.moveLocal(torch, torchPos, rotateTime);
                 StartCoroutine(Move(Vector2.up, "upCheck"));
             }
             else if (inputFunction(KeyCode.DownArrow) || inputFunction(KeyCode.S))
             {
-                LeanTween.rotateZ(hand.gameObject, 180, rotateTime);
-                LeanTween.moveLocalX(torch, torchPos, rotateTime);
+                LeanTween.rotateZ(hand, 180, rotateTime);
+                LeanTween.moveLocal(torch, torchPos, rotateTime);
                 StartCoroutine(Move(Vector2.down, "downCheck"));
             }
             else if (inputFunction(KeyCode.LeftArrow) || inputFunction(KeyCode.A))
             {
-                LeanTween.rotateZ(hand.gameObject, 90, rotateTime);
-                LeanTween.moveLocalX(torch, -0.15f, rotateTime);
+                LeanTween.rotateZ(hand, 90, rotateTime);
+                LeanTween.moveLocal(torch, new Vector3(0, 0.08f, torch.transform.position.z), rotateTime);
                 StartCoroutine(Move(Vector2.left, "leftCheck"));
             }
             else if (inputFunction(KeyCode.RightArrow) || inputFunction(KeyCode.D))
             {
-                LeanTween.rotateZ(hand.gameObject, -90, rotateTime);
-                LeanTween.moveLocalX(torch, 0.15f, rotateTime);
+                LeanTween.rotateZ(hand, -90, rotateTime);
+                LeanTween.moveLocal(torch, new Vector3(0, 0.08f, torch.transform.position.z), rotateTime);
                 StartCoroutine(Move(Vector2.right, "rightCheck"));
             }
         }
@@ -104,7 +107,8 @@ public class Player : MonoBehaviour
 
         isMoving = true;
         anim.SetBool(animBool, true);
-        SoundManager.instance.PlayClip(movementClip, source, true);
+        if (roomHandler.activeRoom < 2) SoundManager.instance.PlayClip(movementOutsideClip, source, true, 1);
+        else SoundManager.instance.PlayClip(movementInsideClip, source, true, 1);
 
         float elapsedTime = 0;
         moveDuration = 1 / speed;
@@ -133,12 +137,13 @@ public class Player : MonoBehaviour
         }
         else if (endPosition == roomHandler.cowPos)
         {
-            if (torchDied)
-            {
-                torchLight.enabled = true;
-                torchDied = false;
-                Human.instance.speed++;
-            }
+            //if (torchDied)
+            //{
+            //    torchLight.enabled = true;
+            //    torchDied = false;
+            //    roomHandler.humans[0].speed++;
+            //    roomHandler.humans[1].speed++;
+            //}
             roomHandler.grabCow();
         }
         
@@ -152,48 +157,50 @@ public class Player : MonoBehaviour
         source.Stop(); //check if messes with opening door sound
     }
 
-    public void torchOff()
-    {
-        torchDied = true;
-        StartCoroutine(flickerTorch());
-        Human.instance.speed--;
-    }
+    //public void torchOff()
+    //{
+    //    torchDied = true;
+    //    StartCoroutine(flickerTorch());
+    //    roomHandler.humans[0].speed--;
+    //    roomHandler.humans[1].speed--;
+    //}
 
-    IEnumerator flickerTorch()
-    {
-        torchLight.enabled = false;
-        float sec;
+    //IEnumerator flickerTorch()
+    //{
+    //    torchLight.intensity = 0.25f;
+    //    float sec;
 
-        sec = Random.Range(0.2f, 0.5f);
-        yield return new WaitForSeconds(sec);
-        torchLight.enabled = true;
+    //    sec = Random.Range(0.2f, 0.5f);
+    //    yield return new WaitForSeconds(sec);
+    //    torchLight.intensity = intensity;
 
-        sec = Random.Range(0.4f, 0.7f);
-        yield return new WaitForSeconds(sec);
-        torchLight.enabled = false;
+    //    sec = Random.Range(0.4f, 0.7f);
+    //    yield return new WaitForSeconds(sec);
+    //    torchLight.intensity = 0.25f;
 
-        sec = Random.Range(0.5f, 0.8f);
-        yield return new WaitForSeconds(sec);
-        torchLight.enabled = true;
+    //    sec = Random.Range(0.5f, 0.8f);
+    //    yield return new WaitForSeconds(sec);
+    //    torchLight.intensity = intensity;
 
-        sec = Random.Range(0.1f, 0.4f);
-        yield return new WaitForSeconds(sec);
-        torchLight.enabled = false;
+    //    sec = Random.Range(0.1f, 0.4f);
+    //    yield return new WaitForSeconds(sec);
+    //    torchLight.intensity = 0.25f;
 
-        sec = Random.Range(0.2f, 0.3f);
-        yield return new WaitForSeconds(sec);
-        torchLight.enabled = true;
+    //    sec = Random.Range(0.2f, 0.3f);
+    //    yield return new WaitForSeconds(sec);
+    //    torchLight.intensity = intensity;
 
-        sec = Random.Range(0.1f, 0.2f);
-        yield return new WaitForSeconds(sec);
-        torchLight.enabled = false;
+    //    sec = Random.Range(0.1f, 0.2f);
+    //    yield return new WaitForSeconds(sec);
+    //    torchLight.intensity = 0.25f;
+    //    torchLight.pointLightOuterRadius = 1.8f;
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == roomHandler.human)
+        if (collision.gameObject.TryGetComponent(out Human h))
         {
             if (roomHandler.enableDeath)
             {

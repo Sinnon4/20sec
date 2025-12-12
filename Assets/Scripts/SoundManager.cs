@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
         if (instance == null) instance = this;
     }
 
-    public void PlayClip(AudioClip clip, AudioSource source, bool loop = false, float vol = 1f, float ptch = 1f)
+    public void PlayClip(AudioClip clip, AudioSource source, bool loop = false, float vol = 0.8f, float ptch = 1f)
     {
         //if (source.outputAudioMixerGroup == null) print(source.gameObject.name + " needs master mixer");
 

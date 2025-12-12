@@ -25,7 +25,7 @@ public class Countdown : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (roomHandler.enableTimer && roomHandler.started && !roomHandler.pendingRound && roomHandler.activeRoom != 0)
+        if (roomHandler.enableTimer && roomHandler.started && !roomHandler.pendingRound)// && roomHandler.activeRoom != 0 && roomHandler.activeRoom != 1)
         {
             t = Math.Round(t - Time.deltaTime, 2);
             if (t >= 0) { timer.text = t.ToString(); }

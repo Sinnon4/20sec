@@ -1,0 +1,660 @@
+fileFormatVersion: 2
+guid: 5c7beaed5da0dec4095bf7986f4b3805
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8866599003209198612
+    second: UI ELEMTS (play_pause_death_loading)_0
+  - first:
+      213: -8393575555027899864
+    second: UI ELEMTS (play_pause_death_loading)_1
+  - first:
+      213: 5443015722601326338
+    second: UI ELEMTS (play_pause_death_loading)_2
+  - first:
+      213: -1709910478735684819
+    second: UI ELEMTS (play_pause_death_loading)_3
+  - first:
+      213: -6775214242227276195
+    second: UI ELEMTS (play_pause_death_loading)_4
+  - first:
+      213: 4508845525261266720
+    second: UI ELEMTS (play_pause_death_loading)_5
+  - first:
+      213: 1026381690801483159
+    second: UI ELEMTS (play_pause_death_loading)_6
+  - first:
+      213: 5814480650550362245
+    second: UI ELEMTS (play_pause_death_loading)_7
+  - first:
+      213: -5678299015977690958
+    second: UI ELEMTS (play_pause_death_loading)_8
+  - first:
+      213: -7964419562179050261
+    second: UI ELEMTS (play_pause_death_loading)_9
+  - first:
+      213: 2882433307844568534
+    second: UI ELEMTS (play_pause_death_loading)_10
+  - first:
+      213: 2221763566502887229
+    second: UI ELEMTS (play_pause_death_loading)_11
+  - first:
+      213: -6353497009142189620
+    second: UI ELEMTS (play_pause_death_loading)_12
+  - first:
+      213: 1644365105114324251
+    second: UI ELEMTS (play_pause_death_loading)_13
+  - first:
+      213: 2606788051728552916
+    second: UI ELEMTS (play_pause_death_loading)_14
+  - first:
+      213: 6661733153585590048
+    second: UI ELEMTS (play_pause_death_loading)_15
+  - first:
+      213: 3434495249689773126
+    second: UI ELEMTS (play_pause_death_loading)_16
+  - first:
+      213: -5535456987068795573
+    second: UI ELEMTS (play_pause_death_loading)_17
+  - first:
+      213: -493618859136060878
+    second: UI ELEMTS (play_pause_death_loading)_18
+  - first:
+      213: 5245281375589608907
+    second: UI ELEMTS (play_pause_death_loading)_19
+  - first:
+      213: -7946914539562072755
+    second: UI ELEMTS (play_pause_death_loading)_20
+  - first:
+      213: -3112506093532860697
+    second: UI ELEMTS (play_pause_death_loading)_21
+  - first:
+      213: -5441387607834588635
+    second: UI ELEMTS (play_pause_death_loading)_22
+  - first:
+      213: -5741321606325116641
+    second: UI ELEMTS (play_pause_death_loading)_23
+  - first:
+      213: -5575555125920035141
+    second: UI ELEMTS (play_pause_death_loading)_24
+  - first:
+      213: 6203538975426595591
+    second: UI ELEMTS (play_pause_death_loading)_25
+  - first:
+      213: -5389138432072521782
+    second: UI ELEMTS (play_pause_death_loading)_26
+  - first:
+      213: -6514897700956360704
+    second: UI ELEMTS (play_pause_death_loading)_27
+  - first:
+      213: 1415330865426952724
+    second: UI ELEMTS (play_pause_death_loading)_28
+  - first:
+      213: -1357988149943905111
+    second: UI ELEMTS (play_pause_death_loading)_29
+  - first:
+      213: 6000615924911335458
+    second: UI ELEMTS (play_pause_death_loading)_30
+  - first:
+      213: 4530607967831248625
+    second: UI ELEMTS (play_pause_death_loading)_31
+  - first:
+      213: -1252440732584183699
+    second: UI ELEMTS (play_pause_death_loading)_32
+  - first:
+      213: -2956682099324291308
+    second: UI ELEMTS (play_pause_death_loading)_33
+  - first:
+      213: -2631883751396285327
+    second: UI ELEMTS (play_pause_death_loading)_34
+  - first:
+      213: -6332212992216608031
+    second: UI ELEMTS (play_pause_death_loading)_35
+  - first:
+      213: -7528813775231908832
+    second: UI ELEMTS (play_pause_death_loading)_36
+  - first:
+      213: 6347278726327654962
+    second: UI ELEMTS (play_pause_death_loading)_37
+  - first:
+      213: 8715455240099721548
+    second: UI ELEMTS (play_pause_death_loading)_38
+  - first:
+      213: 2460437803721951974
+    second: UI ELEMTS (play_pause_death_loading)_39
+  - first:
+      213: -1067234855319161525
+    second: UI ELEMTS (play_pause_death_loading)_40
+  - first:
+      213: 9026810578833140186
+    second: UI ELEMTS (play_pause_death_loading)_41
+  - first:
+      213: -3304573603528379051
+    second: UI ELEMTS (play_pause_death_loading)_42
+  - first:
+      213: -8706916997459977378
+    second: UI ELEMTS (play_pause_death_loading)_43
+  - first:
+      213: -4949808123570081355
+    second: UI ELEMTS (play_pause_death_loading)_44
+  - first:
+      213: -1872148661597461107
+    second: UI ELEMTS (play_pause_death_loading)_45
+  - first:
+      213: 7205672449964857146
+    second: UI ELEMTS (play_pause_death_loading)_46
+  - first:
+      213: -3927773963064920723
+    second: UI ELEMTS (play_pause_death_loading)_47
+  - first:
+      213: 3327776355397520865
+    second: UI ELEMTS (play_pause_death_loading)_48
+  - first:
+      213: -8310974062977248210
+    second: UI ELEMTS (play_pause_death_loading)_49
+  - first:
+      213: 7470307505870782936
+    second: UI ELEMTS (play_pause_death_loading)_50
+  - first:
+      213: 5914026728280546884
+    second: UI ELEMTS (play_pause_death_loading)_51
+  - first:
+      213: 4229046526102661485
+    second: UI ELEMTS (play_pause_death_loading)_52
+  - first:
+      213: 911209558624522192
+    second: UI ELEMTS (play_pause_death_loading)_53
+  - first:
+      213: -1252413887716786036
+    second: UI ELEMTS (play_pause_death_loading)_54
+  - first:
+      213: -9082456690667494373
+    second: UI ELEMTS (play_pause_death_loading)_55
+  - first:
+      213: 3523242414421765127
+    second: UI ELEMTS (play_pause_death_loading)_56
+  - first:
+      213: -1987830635197622151
+    second: UI ELEMTS (play_pause_death_loading)_57
+  - first:
+      213: 8909316139821053402
+    second: UI ELEMTS (play_pause_death_loading)_58
+  - first:
+      213: 2000579856647081630
+    second: UI ELEMTS (play_pause_death_loading)_59
+  - first:
+      213: -4809314216980170759
+    second: UI ELEMTS (play_pause_death_loading)_60
+  - first:
+      213: -2010451293481007482
+    second: UI ELEMTS (play_pause_death_loading)_61
+  - first:
+      213: -6370409670977610159
+    second: UI ELEMTS (play_pause_death_loading)_62
+  - first:
+      213: -306474496076274708
+    second: UI ELEMTS (play_pause_death_loading)_63
+  - first:
+      213: 3346629838364950310
+    second: UI ELEMTS (play_pause_death_loading)_64
+  - first:
+      213: -4644184364736061101
+    second: UI ELEMTS (play_pause_death_loading)_65
+  - first:
+      213: 6699026007073677164
+    second: UI ELEMTS (play_pause_death_loading)_66
+  - first:
+      213: -5824833985458180474
+    second: UI ELEMTS (play_pause_death_loading)_67
+  - first:
+      213: 6997222035886916768
+    second: UI ELEMTS (play_pause_death_loading)_68
+  - first:
+      213: -4489817338327359773
+    second: UI ELEMTS (play_pause_death_loading)_69
+  - first:
+      213: 581127714703830459
+    second: UI ELEMTS (play_pause_death_loading)_70
+  - first:
+      213: 6039546181995534871
+    second: UI ELEMTS (play_pause_death_loading)_71
+  - first:
+      213: -8488473888779438623
+    second: UI ELEMTS (play_pause_death_loading)_72
+  - first:
+      213: -8491198756149464244
+    second: UI ELEMTS (play_pause_death_loading)_73
+  - first:
+      213: -7856238115592820962
+    second: UI ELEMTS (play_pause_death_loading)_74
+  - first:
+      213: -7690162782103263004
+    second: UI ELEMTS (play_pause_death_loading)_75
+  - first:
+      213: -5189546482335054117
+    second: UI ELEMTS (play_pause_death_loading)_76
+  - first:
+      213: -1932067829534450544
+    second: UI ELEMTS (play_pause_death_loading)_77
+  - first:
+      213: 4268083037877575079
+    second: UI ELEMTS (play_pause_death_loading)_78
+  - first:
+      213: 6164234641151359082
+    second: UI ELEMTS (play_pause_death_loading)_79
+  - first:
+      213: 1104262257193876397
+    second: UI ELEMTS (play_pause_death_loading)_80
+  - first:
+      213: -4672808297945175766
+    second: UI ELEMTS (play_pause_death_loading)_81
+  - first:
+      213: -1532262801957956107
+    second: UI ELEMTS (play_pause_death_loading)_82
+  - first:
+      213: 6097847318803913556
+    second: UI ELEMTS (play_pause_death_loading)_83
+  - first:
+      213: -8927114447218158622
+    second: UI ELEMTS (play_pause_death_loading)_84
+  - first:
+      213: -8500316133326115121
+    second: UI ELEMTS (play_pause_death_loading)_85
+  - first:
+      213: 3927492314381743362
+    second: UI ELEMTS (play_pause_death_loading)_86
+  - first:
+      213: -5864982425950417251
+    second: UI ELEMTS (play_pause_death_loading)_87
+  - first:
+      213: -8622882678610239718
+    second: UI ELEMTS (play_pause_death_loading)_88
+  - first:
+      213: 1381777140486261815
+    second: UI ELEMTS (play_pause_death_loading)_89
+  - first:
+      213: -4535653675177318985
+    second: UI ELEMTS (play_pause_death_loading)_90
+  - first:
+      213: -8547473493619204172
+    second: UI ELEMTS (play_pause_death_loading)_91
+  - first:
+      213: -4789786684176194125
+    second: UI ELEMTS (play_pause_death_loading)_92
+  - first:
+      213: 4033074771556225913
+    second: UI ELEMTS (play_pause_death_loading)_93
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 70
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PlayButton
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 336
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41ced10f0dc7c0b70800000000000000
+      internalID: 8866599003209198612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauseButton
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 336
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5c593c703448524dadd71f7fb4de27e
+      internalID: 802716052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: InfoButton
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51090bb07943ae24fb809fd4c0fb6d09
+      internalID: 622549425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UFO
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 216
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5074df906f8a539499f6d1094eb7885c
+      internalID: -1082562994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingGalaxy
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 90
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb2698283aa12d4dbe3c27b402fdf93
+      internalID: -772631630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LoadingEarth
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 90
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8135cc1b51e0a6549a25d1a4b809867a
+      internalID: -1740423829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlienDead
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 90
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb2426885a1fa8148b38a97f9a258e88
+      internalID: 655454048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AlienJail
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 90
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 315dacf0216d1d944a0e4b0b8fea8672
+      internalID: -1192123079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayPressed
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 474
+        width: 312
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d83922ecb08fc447a37d6f313f6387d
+      internalID: 518789741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayIdle
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 318
+        width: 312
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b0edaf88f0b02c4b89cf7311865ad02
+      internalID: -1155215863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a021ce055f216ff44aca2cdc23b2acd9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":2.0},"gridSpriteSize":{"x":336.0,"y":336.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      AlienDead: 655454048
+      AlienJail: -1192123079
+      InfoButton: 622549425
+      LoadingEarth: -1740423829
+      LoadingGalaxy: -772631630
+      PauseButton: 802716052
+      PlayButton: 8866599003209198612
+      PlayIdle: -1155215863
+      PlayPressed: 518789741
+      UFO: -1082562994
+      UI ELEMTS (play_pause_death_loading)_1: -8393575555027899864
+      UI ELEMTS (play_pause_death_loading)_2: 5443015722601326338
+      UI ELEMTS (play_pause_death_loading)_3: -1709910478735684819
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

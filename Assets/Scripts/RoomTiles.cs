@@ -7,12 +7,16 @@ public class RoomTiles : MonoBehaviour
     public List<GameObject> tiles = new();
     [SerializeField] public GameObject[] door;
     [SerializeField] public Sprite floor, wall, backyardSky;
-    //[SerializeField] public Sprite[] obstacleSprites;
+    [SerializeField] public Sprite[] obstacleSprites;
+
+    public AudioSource source;
 
     int newX, newY;
 
     private void Awake()
     {
+        source = GetComponent<AudioSource>();
+
         tiles.Add(base_);
     }
 

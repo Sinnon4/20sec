@@ -23,7 +23,7 @@ public class Human : MonoBehaviour
     public bool chase = true;
 
     [SerializeField] AudioClip movementClip;
-    AudioSource source;
+    public AudioSource source;
 
     private void Awake()
     {

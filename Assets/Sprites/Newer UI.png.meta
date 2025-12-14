@@ -1,0 +1,780 @@
+fileFormatVersion: 2
+guid: fc1e8b6d0e6ca9c44b7de31e0b6c784a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7700441312290989422
+    second: Newer UI_0
+  - first:
+      213: -4957942741846812541
+    second: Newer UI_1
+  - first:
+      213: -1575992962287169275
+    second: Newer UI_2
+  - first:
+      213: -6483942241462742926
+    second: Newer UI_3
+  - first:
+      213: 828919260135663681
+    second: Newer UI_4
+  - first:
+      213: -9052344635053825643
+    second: Newer UI_5
+  - first:
+      213: 4063117571424204741
+    second: Newer UI_6
+  - first:
+      213: 3023180523981850923
+    second: Newer UI_7
+  - first:
+      213: 368545324206243167
+    second: Newer UI_8
+  - first:
+      213: -641537257701947113
+    second: Newer UI_9
+  - first:
+      213: -1013328141769729237
+    second: Newer UI_10
+  - first:
+      213: -5014416262517320221
+    second: Newer UI_11
+  - first:
+      213: 6132262849187952674
+    second: Newer UI_12
+  - first:
+      213: 7973116230651437956
+    second: Newer UI_13
+  - first:
+      213: -4958905000925570247
+    second: Newer UI_14
+  - first:
+      213: -9209144592199524867
+    second: Newer UI_15
+  - first:
+      213: -600582944646392250
+    second: Newer UI_16
+  - first:
+      213: 4792562071182158846
+    second: Newer UI_17
+  - first:
+      213: -4077236286350140240
+    second: Newer UI_18
+  - first:
+      213: 5471008652954855889
+    second: Newer UI_19
+  - first:
+      213: -7733843060759795612
+    second: Newer UI_20
+  - first:
+      213: 9128240638655962039
+    second: Newer UI_21
+  - first:
+      213: 8129469820987372655
+    second: Newer UI_22
+  - first:
+      213: -5854354144462853267
+    second: Newer UI_23
+  - first:
+      213: 3171269409969828085
+    second: Newer UI_24
+  - first:
+      213: -726778692173221003
+    second: Newer UI_25
+  - first:
+      213: 164227024836417042
+    second: Newer UI_26
+  - first:
+      213: 6803173632548959973
+    second: Newer UI_27
+  - first:
+      213: 2903961915675449823
+    second: Newer UI_28
+  - first:
+      213: -1223860857652954147
+    second: Newer UI_29
+  - first:
+      213: -8050788203642953798
+    second: Newer UI_30
+  - first:
+      213: -6462017032998016028
+    second: Newer UI_31
+  - first:
+      213: 6027894524766148705
+    second: Newer UI_32
+  - first:
+      213: 8098065750105263664
+    second: Newer UI_33
+  - first:
+      213: 8027418868447215861
+    second: Newer UI_34
+  - first:
+      213: 6900881570002561686
+    second: Newer UI_35
+  - first:
+      213: -7181362213644049891
+    second: Newer UI_36
+  - first:
+      213: 5601276219590224321
+    second: Newer UI_37
+  - first:
+      213: -4524827029370286253
+    second: Newer UI_38
+  - first:
+      213: 1509989397546046773
+    second: Newer UI_39
+  - first:
+      213: -5880700286735311093
+    second: Newer UI_40
+  - first:
+      213: -977093924571296731
+    second: Newer UI_41
+  - first:
+      213: 8240983116774392306
+    second: Newer UI_42
+  - first:
+      213: 1822186464706536904
+    second: Newer UI_43
+  - first:
+      213: -5784687883007647723
+    second: Newer UI_44
+  - first:
+      213: 249354809884445743
+    second: Newer UI_45
+  - first:
+      213: 4407597950580040325
+    second: Newer UI_46
+  - first:
+      213: -765108371659401113
+    second: Newer UI_47
+  - first:
+      213: 7326240563762954940
+    second: Newer UI_48
+  - first:
+      213: -147840083048186682
+    second: Newer UI_49
+  - first:
+      213: -8913430745613257225
+    second: Newer UI_50
+  - first:
+      213: 6867056594193113103
+    second: Newer UI_51
+  - first:
+      213: -2701399513636846041
+    second: Newer UI_52
+  - first:
+      213: 1696380781632220359
+    second: Newer UI_53
+  - first:
+      213: 6290563175839051215
+    second: Newer UI_54
+  - first:
+      213: -3105448580920190784
+    second: Newer UI_55
+  - first:
+      213: 8938324852058432378
+    second: Newer UI_56
+  - first:
+      213: 2683514265943376404
+    second: Newer UI_57
+  - first:
+      213: 2680320236292761006
+    second: Newer UI_58
+  - first:
+      213: -8251605498789769172
+    second: Newer UI_59
+  - first:
+      213: -7910847364654919102
+    second: Newer UI_60
+  - first:
+      213: -4276034150186866388
+    second: Newer UI_61
+  - first:
+      213: -2590875002559683223
+    second: Newer UI_62
+  - first:
+      213: 1818351578499661979
+    second: Newer UI_63
+  - first:
+      213: -5154905204201218911
+    second: Newer UI_64
+  - first:
+      213: -1650589569371430781
+    second: Newer UI_65
+  - first:
+      213: -6926309959419110839
+    second: Newer UI_66
+  - first:
+      213: 1870891744918420428
+    second: Newer UI_67
+  - first:
+      213: 61296361323328889
+    second: Newer UI_68
+  - first:
+      213: -271924300057047550
+    second: Newer UI_69
+  - first:
+      213: 3843657750768511068
+    second: Newer UI_70
+  - first:
+      213: -3053343297010723640
+    second: Newer UI_71
+  - first:
+      213: -4261071286787763385
+    second: Newer UI_72
+  - first:
+      213: 269476094952839506
+    second: Newer UI_73
+  - first:
+      213: -3555158462091809816
+    second: Newer UI_74
+  - first:
+      213: -5371297974430688657
+    second: Newer UI_75
+  - first:
+      213: -4673024336721325669
+    second: Newer UI_76
+  - first:
+      213: -8604912517364899135
+    second: Newer UI_77
+  - first:
+      213: -8572456235800420348
+    second: Newer UI_78
+  - first:
+      213: -745946188487608687
+    second: Newer UI_79
+  - first:
+      213: 8368040366933007877
+    second: Newer UI_80
+  - first:
+      213: 957566373288945719
+    second: Newer UI_81
+  - first:
+      213: -8903366455275228746
+    second: Newer UI_82
+  - first:
+      213: -7366011279300731182
+    second: Newer UI_83
+  - first:
+      213: 2263652376498598802
+    second: Newer UI_84
+  - first:
+      213: -4839381425443491659
+    second: Newer UI_85
+  - first:
+      213: 1392804846017719257
+    second: Newer UI_86
+  - first:
+      213: 8216105592805425229
+    second: Newer UI_87
+  - first:
+      213: 3119507976988496904
+    second: Newer UI_88
+  - first:
+      213: -8573817023827601914
+    second: Newer UI_89
+  - first:
+      213: 2535180441449692870
+    second: Newer UI_90
+  - first:
+      213: -3623104390334294131
+    second: Newer UI_91
+  - first:
+      213: -4023849598581308131
+    second: Newer UI_92
+  - first:
+      213: 5283098655434086282
+    second: Newer UI_93
+  - first:
+      213: 8236644732298803481
+    second: Newer UI_94
+  - first:
+      213: 250641730206210952
+    second: Newer UI_95
+  - first:
+      213: -1766408511173906500
+    second: Newer UI_96
+  - first:
+      213: -7259048809628381813
+    second: Newer UI_97
+  - first:
+      213: -5413723644300922956
+    second: Newer UI_98
+  - first:
+      213: -253257972907710861
+    second: Newer UI_99
+  - first:
+      213: -2888659743345809750
+    second: Newer UI_100
+  - first:
+      213: 4549672855123890949
+    second: Newer UI_101
+  - first:
+      213: 2454743132713400325
+    second: Newer UI_102
+  - first:
+      213: 6536028738862177600
+    second: Newer UI_103
+  - first:
+      213: 4920479876745471773
+    second: Newer UI_104
+  - first:
+      213: -4111310730011995714
+    second: Newer UI_105
+  - first:
+      213: 5603916588820543154
+    second: Newer UI_106
+  - first:
+      213: -8000447838592757269
+    second: Newer UI_107
+  - first:
+      213: -8822743229432561845
+    second: Newer UI_108
+  - first:
+      213: -3175563301819204631
+    second: Newer UI_109
+  - first:
+      213: 7225076671955312180
+    second: Newer UI_110
+  - first:
+      213: -4948775155541425999
+    second: Newer UI_111
+  - first:
+      213: -9059393313255243125
+    second: Newer UI_112
+  - first:
+      213: -2891423288749698598
+    second: Newer UI_113
+  - first:
+      213: -48365791042149275
+    second: Newer UI_114
+  - first:
+      213: 2496538005091880762
+    second: Newer UI_115
+  - first:
+      213: -8802622039581536062
+    second: Newer UI_116
+  - first:
+      213: -3630377567050328430
+    second: Newer UI_117
+  - first:
+      213: -6141587051865615877
+    second: Newer UI_118
+  - first:
+      213: -6141975041698801798
+    second: Newer UI_119
+  - first:
+      213: -3001783894012243905
+    second: Newer UI_120
+  - first:
+      213: -8975356807276052650
+    second: Newer UI_121
+  - first:
+      213: -1041540929137271310
+    second: Newer UI_122
+  - first:
+      213: 6996653407655106330
+    second: Newer UI_123
+  - first:
+      213: 6091799946657904298
+    second: Newer UI_124
+  - first:
+      213: -7675809027204160047
+    second: Newer UI_125
+  - first:
+      213: 9192654718730782620
+    second: Newer UI_126
+  - first:
+      213: -5174969630162062835
+    second: Newer UI_127
+  - first:
+      213: 3858128831705028019
+    second: Newer UI_128
+  - first:
+      213: 3837764148854445349
+    second: Newer UI_129
+  - first:
+      213: -2652518477703425867
+    second: Newer UI_130
+  - first:
+      213: -3181191278100214050
+    second: Newer UI_131
+  - first:
+      213: -6470869880949472210
+    second: Newer UI_132
+  - first:
+      213: 6784471789731092902
+    second: Newer UI_133
+  - first:
+      213: -2339332674673959809
+    second: Newer UI_134
+  - first:
+      213: -6995632555234342449
+    second: Newer UI_135
+  - first:
+      213: 1709541843597469462
+    second: Newer UI_136
+  - first:
+      213: 8701658594980312023
+    second: Newer UI_137
+  - first:
+      213: -7506719713835946764
+    second: Newer UI_138
+  - first:
+      213: -63037457539187220
+    second: Newer UI_139
+  - first:
+      213: -1890514059635266647
+    second: Newer UI_140
+  - first:
+      213: -7901276162405676950
+    second: Newer UI_141
+  - first:
+      213: -1898673788400296931
+    second: Newer UI_142
+  - first:
+      213: -623934194297967133
+    second: Newer UI_143
+  - first:
+      213: -4647436484894516557
+    second: Newer UI_144
+  - first:
+      213: -6294703766038109487
+    second: Newer UI_145
+  - first:
+      213: -3974829054998835695
+    second: Newer UI_146
+  - first:
+      213: 426304299950144998
+    second: Newer UI_147
+  - first:
+      213: -1943431379337242855
+    second: Newer UI_148
+  - first:
+      213: -5650715462745677683
+    second: Newer UI_149
+  - first:
+      213: 1340768740736259600
+    second: Newer UI_150
+  - first:
+      213: 5943691116268382763
+    second: Newer UI_151
+  - first:
+      213: -4481977583918662329
+    second: Newer UI_152
+  - first:
+      213: 8225823184956850304
+    second: Newer UI_153
+  - first:
+      213: -864698936267837457
+    second: Newer UI_154
+  - first:
+      213: 6451112041963775225
+    second: Newer UI_155
+  - first:
+      213: 791597135209095662
+    second: Newer UI_156
+  - first:
+      213: 3497878998678582620
+    second: Newer UI_157
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LightPost
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 276
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e65e8d823967dda60800000000000000
+      internalID: 7700441312290989422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GAMEOVER
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 252
+        width: 450
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06cd5f68ba322a448b2bc9a1d1945510
+      internalID: -724271850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Info
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 120
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f8f8b965daff740879a9120de2b477
+      internalID: 1481329532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Redo
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 120
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2db7d1c161e46b41aa7745d2eac2981
+      internalID: 1776947820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Play
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 120
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f64434b5bf424674bbc142304f1933b4
+      internalID: -1034748909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Exit
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 120
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cc2846616265de4c9ecacfc42e4fc7c
+      internalID: 1939921128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pause
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 120
+        width: 72
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7e747fc83a9d2a418094aa6e47a801b
+      internalID: 650848860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c62a0c97fb228ef47a6c4f8f7e8ae7a9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":708.0,"y":420.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Exit: 1939921128
+      GAMEOVER: -724271850
+      Info: 1481329532
+      LightPost: 7700441312290989422
+      Pause: 650848860
+      Play: -1034748909
+      Redo: 1776947820
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

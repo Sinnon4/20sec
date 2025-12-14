@@ -2781,7 +2781,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 437
-        y: 1051
+        y: 1053
         width: 148
         height: 148
       alignment: 0
@@ -2799,7 +2799,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OBSTACLES + GUIDELINES_10
+      name: BabyObstacle
       rect:
         serializedVersion: 2
         x: 816
@@ -2821,15 +2821,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OBSTACLES + GUIDELINES_12
+      name: BathroomObstacle1
       rect:
         serializedVersion: 2
         x: 67
         y: 857
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2843,15 +2843,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OBSTACLES + GUIDELINES_13
+      name: BathroomObstacle2
       rect:
         serializedVersion: 2
         x: 252
         y: 857
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2865,15 +2865,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OBSTACLES + GUIDELINES_14
+      name: BathroomObstacle3
       rect:
         serializedVersion: 2
         x: 437
         y: 857
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2894,8 +2894,8 @@ TextureImporter:
         y: 663
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -2916,8 +2916,8 @@ TextureImporter:
         y: 663
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -3026,8 +3026,8 @@ TextureImporter:
         y: 469
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -3048,8 +3048,8 @@ TextureImporter:
         y: 469
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -3070,8 +3070,8 @@ TextureImporter:
         y: 470
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -3089,11 +3089,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 631
-        y: 469
+        y: 467
         width: 148
         height: 148
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -3132,7 +3132,7 @@ TextureImporter:
       name: BedroomObstacle3
       rect:
         serializedVersion: 2
-        x: 1001
+        x: 1003
         y: 469
         width: 148
         height: 148
@@ -3320,6 +3320,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":7.0},"gridSpriteSize":{"x":148.0,"y":148.0},"gridSpriteOffset":{"x":67.0,"y":107.0},"gridSpritePadding":{"x":37.0,"y":46.0},"pivot":{"x":0.0,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":4,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      BabyObstacle: 310657561
+      BathroomObstacle1: -1011407803
+      BathroomObstacle2: -1808797981
+      BathroomObstacle3: -2043303683
       BedroomObstacle1: 821733668
       BedroomObstacle2: 1192336958
       BedroomObstacle3: -79904543
@@ -3334,11 +3338,7 @@ TextureImporter:
       LivingRoomObstacle3: 719573895
       OBSTACLES + GUIDELINES_0: -430262795
       OBSTACLES + GUIDELINES_1: -1316839528
-      OBSTACLES + GUIDELINES_10: 310657561
       OBSTACLES + GUIDELINES_11: 580164874
-      OBSTACLES + GUIDELINES_12: -1011407803
-      OBSTACLES + GUIDELINES_13: -1808797981
-      OBSTACLES + GUIDELINES_14: -2043303683
       OBSTACLES + GUIDELINES_15: 690694772
       OBSTACLES + GUIDELINES_16: 631413299
       OBSTACLES + GUIDELINES_17: 1927155495

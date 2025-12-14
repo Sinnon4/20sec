@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoomHandler : MonoBehaviour
 {
@@ -73,12 +74,12 @@ public class RoomHandler : MonoBehaviour
     [SerializeField] float UFOAscentTime = 2;
     [SerializeField] float
         playerAscentTime = 1,
-        //UFOExitTime = 2,
         camExitTime = 1;
 
     [Header("Obstacles")]
     [SerializeField] GameObject item;
-    [SerializeField] Sprite[] itemSprites;
+    [SerializeField] Sprite babySprite;
+    bool babySpawned;
     public List<GameObject> items = new();
     int itemCount;
     [SerializeField] int maxItems = 3;
@@ -96,7 +97,7 @@ public class RoomHandler : MonoBehaviour
     bool paused = false;
 
     [Space][Space]
-    [SerializeField] int torchOffRounds = 2;
+    [SerializeField] int torchOffRounds = 5;
     int torchOffRound;
     [SerializeField] List<Light2D> allLights = new();
 
@@ -117,24 +118,26 @@ public class RoomHandler : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] AudioClip UFOClip;
     [SerializeField] AudioClip
+        alienStartClip,
         abductClip,
         doorClip,
         grabCowClip1, grabCowClip2,
         buttonClick,
         loseClip;
     AudioSource source;
+    bool alienAudioPlaying;
+    float alien_t;
+    [SerializeField] float alienAudioTime = 2;
 
     private void Awake()
     {
         startScreenBlack.SetActive(true);
-        //startScreen.SetActive(true);
         pauseButton.SetActive(false);
         buttons.SetActive(false);
 
         player = FindAnyObjectByType<Player>();
         timer = FindAnyObjectByType<Countdown>();
         dLog = FindAnyObjectByType<DialogueHandler>();
-        //minimap = FindAnyObjectByType<MinimapTracker>();
         source = GetComponent<AudioSource>();
 
         gameOverText = gameOver.GetComponentInChildren<TextMeshProUGUI>();
@@ -177,6 +180,8 @@ public class RoomHandler : MonoBehaviour
         if (!started && Input.anyKeyDown) startGame();
         else if (started && !paused)
         {
+            if (alienAudioPlaying && Time.timeSinceLevelLoad - alien_t > alienAudioTime) { UFO.GetComponent<AudioSource>().Stop(); alienAudioPlaying = false; }
+
             if (pendingRound)
             {
                 if (Input.GetKey(KeyCode.Space)) Time.timeScale = 2;
@@ -199,9 +204,9 @@ public class RoomHandler : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape)) { Quit(); } //close game
 
-            if (Input.GetKeyDown(KeyCode.T)) { WinGame(); } //instant win
+            //if (Input.GetKeyDown(KeyCode.T)) { WinGame(); } //instant win
 
-            if (Input.GetKeyDown(KeyCode.Y)) { foreach (Light2D light in allLights) light.enabled = false; } //turn lights on
+            //if (Input.GetKeyDown(KeyCode.Y)) { foreach (Light2D light in allLights) light.enabled = false; } //turn lights on
 
             if (!isDead && player.hasCow && activeRoom == 0 && player.transform.position.y == activeBorder1.y - 0.5f) WinGame(); //top of BackYard
             else
@@ -212,14 +217,17 @@ public class RoomHandler : MonoBehaviour
 
     void startGame()
     {
-        //Destroy(startScreenBlack);
         started = true;
-        //startScreen.SetActive(false);
         pauseButton.SetActive(true);
-        cowText.transform.LeanMoveLocal(new Vector2(810, 390), 1);
+        SoundManager.instance.PlayClip(alienStartClip, UFO.GetComponent<AudioSource>());
+        alienAudioPlaying = true;
+        alien_t = Time.timeSinceLevelLoad;
+        cowText.transform.LeanMoveLocal(new Vector2(hText.transform.localPosition.x, 390), 1);
         cowText.transform.LeanScale(Vector3.one, 1);
         minimap.transform.LeanMoveLocal(new Vector2(-660, -366), 1);
         minimap.transform.LeanScale(Vector3.one, 1);
+
+        randPrompt = dLog.insertText(startGamePrompts, startGameColors);
     }
 
     public bool isWithinRoom(Vector2 pos, int room)
@@ -269,8 +277,7 @@ public class RoomHandler : MonoBehaviour
     void resetRooms()
     {
         roomBorders.Clear();
-        //roomBorders.Add(new Vector4(activeBorder1.x, activeBorder2.x, activeBorder2.y, activeBorder1.y)); //going to cause an issue when going from frontyard to backyard
-        print("front yard door not randomising");
+        
         //exclude BackYard -- no
         for (int i = 0; i < rooms.Length; i++)
         {
@@ -310,8 +317,6 @@ public class RoomHandler : MonoBehaviour
 
     public void updateActiveRoom(Vector2 pos)
     {
-        SoundManager.instance.PlayClip(doorClip, source);
-
         //check each rooms borders to see which room the player is in and then activate that room and deactivate the previous one
         for (int i = 0; i < rooms.Length; i++)
         {
@@ -338,6 +343,7 @@ public class RoomHandler : MonoBehaviour
             }
         }
 
+        SoundManager.instance.PlayClip(doorClip, rooms[activeRoom].source);
         minimap.updateMap();
     }
 
@@ -346,6 +352,7 @@ public class RoomHandler : MonoBehaviour
         timer.ResetTimer();
         cows++;
         cowCount.text = $"Specimens Acquired: {cows.ToString()}";
+        //randPrompt = dLog.insertText(startGamePrompts, startGameColors);
 
         if (humanHideRound == cows)
         {
@@ -365,35 +372,38 @@ public class RoomHandler : MonoBehaviour
 
         //spawn random items in every room (exclude BackYard and FrontYard)
         int n;
+        int babyRoom = Random.Range(2,rooms.Length);
         for (int i = 2; i < rooms.Length; i++)
         {
             rnd = randz(i, true);
             n = 0;
             itemCount = 0;
-            while (n <= 50 && itemCount < maxItems)
+            while (n <= 20 && itemCount < maxItems)
             {
                 while (checkTiles("Item", rnd))
                 {
-                    if (n > 50) { if (enableLogs) { Debug.Log($"<color=orange>No space for item placement in {activeRoom}"); } break; }
+                    if (n > 20) { if (enableLogs) { Debug.Log($"<color=orange>No space for item placement in {activeRoom}"); } break; }
                     n++;
                     rnd = randz(i, true);
                 }
 
-                if (n <= 50)
+                if (n <= 20)
                 {
                     items.Add(Instantiate(item, rnd, Quaternion.identity, transform));
-                    items[items.Count - 1].GetComponent<SpriteRenderer>().sprite = itemSprites[Random.Range(0, itemSprites.Length)];
+                    if (i == babyRoom && !babySpawned) { items[items.Count - 1].GetComponent<SpriteRenderer>().sprite = babySprite; babySpawned = true; } //spawn one baby per round
+                    else items[items.Count - 1].GetComponent<SpriteRenderer>().sprite = rooms[i].obstacleSprites[Random.Range(0, rooms[i].obstacleSprites.Length)];
                     itemCount++;
                 }
             }
         }
+        babySpawned = false;
 
         //spawn cow in random location (minimise amount of times can spawn in living room)
         if (cows == 0) cowRoom = 2; //put cow in LivingRoom for first round
         else if (LRcounter == 0) cowRoom = Random.Range(2, rooms.Length); //exclude BackYard and FrontYard
         else cowRoom = Random.Range(3, rooms.Length); //exclude LivingRoom
 
-        if (cowRoom == 1) LRcounter = 4; //cannot be in LivingRoom again for 4 rounds
+        if (cowRoom == 2) LRcounter = 4; //cannot be in LivingRoom again for 4 rounds
 
         rnd = randz(cowRoom);
         
@@ -401,7 +411,6 @@ public class RoomHandler : MonoBehaviour
         
         cowPos = rnd;
         activeCow = Instantiate(cow, cowPos, Quaternion.identity);
-        //cowText.text = $"The cow is in the <color=green><size=120%>{rooms[cowRoom].name}";
 
         for (int h = 0; h < humans.Count; h++)
         {
@@ -523,6 +532,8 @@ public class RoomHandler : MonoBehaviour
         buttons.SetActive(true);
         player.enabled = false;
         if (player.source.isPlaying) { player.source.Stop(); }
+        if (UFO.GetComponent<AudioSource>().isPlaying) { UFO.GetComponent<AudioSource>().Stop(); }
+        foreach (Human human in humans) { if (human.source.isPlaying) human.source.Stop(); }
         SoundManager.instance.PlayClip(buttonClick, source);
         Time.timeScale = 0;
     }
@@ -556,8 +567,8 @@ public class RoomHandler : MonoBehaviour
         if (!isDead)
         {
             print("<color=yellow>Cow acquired");
-            if (Random.value < 0.5f) SoundManager.instance.PlayClip(grabCowClip1, source);
-            else SoundManager.instance.PlayClip(grabCowClip2, source);
+            if (Random.value < 0.5f) SoundManager.instance.PlayClip(grabCowClip1, rooms[activeRoom].source);
+            else SoundManager.instance.PlayClip(grabCowClip2, rooms[activeRoom].source);
             Destroy(activeCow);
             cowPos = Vector2.positiveInfinity;
             player.hasCow = true;
@@ -598,10 +609,7 @@ public class RoomHandler : MonoBehaviour
             dLog.insertText(diedPrompts, diedColors);
         }
         player.GetComponent<SpriteRenderer>().sortingOrder = 100; //put in front of black screen
-        //startScreenBlack.LeanAlpha(0.98f, startScreenFadeTime - 1); //fade out scene
-        startScreenBlack.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.98f);
-        //player.transform.LeanScale(Vector3.one * 4, 2);
-        //cowCount.transform.LeanScale(Vector3.one * 2, 2);
+        startScreenBlack.LeanAlpha(0.98f, startScreenFadeTime); //fade out scene
         cowCount.transform.localPosition = new Vector2(0, -250);
         cowText.color = new Color(1, 1, 1, 0.1f);
         hText.color = new Color(1, 1, 1, 0.1f);
@@ -638,19 +646,18 @@ public class RoomHandler : MonoBehaviour
 
         UFO.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 13); //line UFO up with player
         UFO.gameObject.LeanMoveY(UFO.transform.position.y - 10, UFOAscentTime).setEaseOutCubic(); //UFO descends
-        //SoundManager.instance.PlayClip(UFOClip, source);
         yield return new WaitForSeconds(UFOAscentTime);
 
         player.gameObject.LeanMoveY(player.transform.position.y + 3, playerAscentTime).setEaseInQuad(); //player ascends
-        SoundManager.instance.PlayClip(abductClip, source, false, 1, Random.Range(0.8f,1.2f));
+        SoundManager.instance.PlayClip(abductClip, UFO.GetComponent<AudioSource>(), false, 1, Random.Range(0.8f,1.2f));
         yield return new WaitForSeconds(playerAscentTime);
-        
-        source.Stop();
+
+        UFO.GetComponent<AudioSource>().Stop();
         player.GetComponent<SpriteRenderer>().enabled = false;
         UFO.gameObject.LeanMoveX(UFO.transform.position.x + 10, camExitTime).setEaseInCirc(); //UFO goes right
-        SoundManager.instance.PlayClip(UFOClip, source);
+        SoundManager.instance.PlayClip(UFOClip, UFO.GetComponent<AudioSource>());
         cam.gameObject.LeanMoveX(cam.transform.position.x + 20, camExitTime).setEaseInCirc(); //camera pans right
-        yield return new WaitForSeconds(camExitTime); //change to camExitTime for quicker?
+        yield return new WaitForSeconds(camExitTime);
 
         resetRooms(); //also resets active room and borders to backyard
         StartNewRound();
@@ -665,25 +672,24 @@ public class RoomHandler : MonoBehaviour
 
         player.GetComponent<SpriteRenderer>().enabled = true;
         player.gameObject.LeanMoveY(player.transform.position.y - 3, playerAscentTime).setEaseOutCubic(); //player descends
-        SoundManager.instance.PlayClip(abductClip, source, false, 1, Random.Range(0.8f, 1.2f));
+        SoundManager.instance.PlayClip(abductClip, UFO.GetComponent<AudioSource>(), false, 1, Random.Range(0.8f, 1.2f));
         yield return new WaitForSeconds(playerAscentTime);
 
-        source.Stop();
+        UFO.GetComponent<AudioSource>().Stop();
         UFO.gameObject.LeanMoveY(UFO.transform.position.y + 10, UFOAscentTime-0.5f).setEaseInBack(); //UFO ascends
-        //SoundManager.instance.PlayClip(UFOClip, source);
         yield return new WaitForSeconds(UFOAscentTime/2);
 
         humans[0].torchLight.enabled = true;
         humans[1].torchLight.enabled = true;
         player.torchLight.enabled = true;
 
-        //if (cows == torchOffRound)
-        //{
-        //    player.torchOff();
-        //    torchOffRound += torchOffRounds; //occurs every 5 rounds
-        //    dLog.insertText(torchDiedPrompts, torchDiedColors);
-        //}
-        //else randPrompt = dLog.insertText(startGamePrompts, startGameColors);
+        if (cows == torchOffRound)
+        {
+            player.torchOff();
+            torchOffRound += torchOffRounds; //occurs every 5 rounds
+            dLog.insertText(torchDiedPrompts, torchDiedColors);
+        }
+        else randPrompt = dLog.insertText(startGamePrompts, startGameColors);
 
         cam.enabled = true;
         fastForward.SetActive(false);

@@ -18,28 +18,27 @@ public class Player : MonoBehaviour
     public Light2D torchLight;
     Vector3 torchPos;
     [SerializeField] float rotateTime;
-    //bool torchDied;
-    //float intensity;
+    bool torchDied;
+    public float intensity;
 
     public bool hasCow = false;
 
     public Animator anim;
 
     [Header("Sounds")]
-    [SerializeField] AudioClip openDoorClip;
+    [SerializeField] AudioClip torchOffClip;
     [SerializeField] AudioClip
         movementOutsideClip,
-        movementInsideClip,
-        torchOffClip;
+        movementInsideClip;
     public AudioSource source;
 
     private void Awake()
     {
         roomHandler = FindAnyObjectByType<RoomHandler>();
-        print("add death animation");
+        
         torchLight = torch.GetComponentInChildren<Light2D>();
         torchPos = torch.transform.localPosition;
-        //intensity = torchLight.intensity;
+        intensity = torchLight.intensity;
 
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
@@ -107,8 +106,8 @@ public class Player : MonoBehaviour
 
         isMoving = true;
         anim.SetBool(animBool, true);
-        if (roomHandler.activeRoom < 2) SoundManager.instance.PlayClip(movementOutsideClip, source, true, 1);
-        else SoundManager.instance.PlayClip(movementInsideClip, source, true, 1);
+        if (roomHandler.activeRoom < 2) SoundManager.instance.PlayClip(movementOutsideClip, source, true, 1, Random.Range(0.9f, 1.1f));
+        else SoundManager.instance.PlayClip(movementInsideClip, source, true, 1, Random.Range(0.9f,1.1f));
 
         float elapsedTime = 0;
         moveDuration = 1 / speed;
@@ -124,8 +123,6 @@ public class Player : MonoBehaviour
 
         if (pass == true)
         {
-            //SoundManager.instance.PlayClip(openDoorClip, source);
-
             DoorPath dp = roomHandler.doors[doorNo].GetComponent<DoorPath>();
             if (dp.destination == null) { print("<color=yellow>Locked! :O"); transform.position = startPosition; }
             else if (dp.xDir == 1) transform.position = dp.destination.transform.position + Vector3.right;
@@ -137,13 +134,13 @@ public class Player : MonoBehaviour
         }
         else if (endPosition == roomHandler.cowPos)
         {
-            //if (torchDied)
-            //{
-            //    torchLight.enabled = true;
-            //    torchDied = false;
-            //    roomHandler.humans[0].speed++;
-            //    roomHandler.humans[1].speed++;
-            //}
+            if (torchDied)
+            {
+                torchLight.intensity = intensity;
+                torchDied = false;
+                roomHandler.humans[0].speed++;
+                roomHandler.humans[1].speed++;
+            }
             roomHandler.grabCow();
         }
         
@@ -157,46 +154,46 @@ public class Player : MonoBehaviour
         source.Stop(); //check if messes with opening door sound
     }
 
-    //public void torchOff()
-    //{
-    //    torchDied = true;
-    //    StartCoroutine(flickerTorch());
-    //    roomHandler.humans[0].speed--;
-    //    roomHandler.humans[1].speed--;
-    //}
+    public void torchOff()
+    {
+        torchDied = true;
+        StartCoroutine(flickerTorch());
+        roomHandler.humans[0].speed--;
+        roomHandler.humans[1].speed--;
+    }
 
-    //IEnumerator flickerTorch()
-    //{
-    //    torchLight.intensity = 0.25f;
-    //    float sec;
+    IEnumerator flickerTorch()
+    {
+        torchLight.intensity = 0.4f;
+        float sec;
 
-    //    sec = Random.Range(0.2f, 0.5f);
-    //    yield return new WaitForSeconds(sec);
-    //    torchLight.intensity = intensity;
+        sec = Random.Range(0.2f, 0.5f);
+        yield return new WaitForSeconds(sec);
+        torchLight.intensity = intensity;
 
-    //    sec = Random.Range(0.4f, 0.7f);
-    //    yield return new WaitForSeconds(sec);
-    //    torchLight.intensity = 0.25f;
+        sec = Random.Range(0.4f, 0.7f);
+        yield return new WaitForSeconds(sec);
+        torchLight.intensity = 0.4f;
 
-    //    sec = Random.Range(0.5f, 0.8f);
-    //    yield return new WaitForSeconds(sec);
-    //    torchLight.intensity = intensity;
+        sec = Random.Range(0.5f, 0.8f);
+        yield return new WaitForSeconds(sec);
+        torchLight.intensity = intensity;
 
-    //    sec = Random.Range(0.1f, 0.4f);
-    //    yield return new WaitForSeconds(sec);
-    //    torchLight.intensity = 0.25f;
+        sec = Random.Range(0.1f, 0.4f);
+        yield return new WaitForSeconds(sec);
+        torchLight.intensity = 0.1f;
 
-    //    sec = Random.Range(0.2f, 0.3f);
-    //    yield return new WaitForSeconds(sec);
-    //    torchLight.intensity = intensity;
+        sec = Random.Range(0.2f, 0.3f);
+        yield return new WaitForSeconds(sec);
+        torchLight.intensity = intensity;
 
-    //    sec = Random.Range(0.1f, 0.2f);
-    //    yield return new WaitForSeconds(sec);
-    //    torchLight.intensity = 0.25f;
-    //    torchLight.pointLightOuterRadius = 1.8f;
+        sec = Random.Range(0.1f, 0.2f);
+        yield return new WaitForSeconds(sec);
+        torchLight.intensity = 0.4f;
+        torchLight.pointLightOuterRadius = 1.8f;
 
-    //    yield return null;
-    //}
+        yield return true;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

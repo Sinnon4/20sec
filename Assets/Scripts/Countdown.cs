@@ -10,22 +10,16 @@ public class Countdown : MonoBehaviour
     public double t;
     bool t1, t2, t3, t4, t5;
 
-    [SerializeField] AudioClip ticktockClip;
-    AudioSource source;
-
     private void Awake()
     {
         roomHandler = FindAnyObjectByType<RoomHandler>();
         timer = GetComponent<TextMeshProUGUI>();
         t = time;
-
-        source = GetComponent<AudioSource>();
-        //SoundManager.instance.PlayClip(ticktockClip, source, true);
     }
 
     void FixedUpdate()
     {
-        if (roomHandler.enableTimer && roomHandler.started && !roomHandler.pendingRound)// && roomHandler.activeRoom != 0 && roomHandler.activeRoom != 1)
+        if (roomHandler.enableTimer && roomHandler.started && !roomHandler.pendingRound && roomHandler.canMove)
         {
             t = Math.Round(t - Time.deltaTime, 2);
             if (t >= 0) { timer.text = t.ToString(); }
@@ -36,10 +30,10 @@ public class Countdown : MonoBehaviour
                 roomHandler.LoseGame(true);
             }
 
-            if      (t < 5 && !t5) { t5 = true; LeanTween.scale(gameObject, Vector2.one * 2.5f, 0.4f);} //SoundManager.instance.PlayClip(ticktockClip, source, true, 1, 2); }
+            if      (t < 5 && !t5) { t5 = true; LeanTween.scale(gameObject, Vector2.one * 2.5f, 0.4f);}
             else if (t < 4 && !t4) { t4 = true; LeanTween.scale(gameObject, Vector2.one * 2, 0.4f); }
             else if (t < 3 && !t3) { t3 = true; LeanTween.scale(gameObject, Vector2.one * 3, 0.4f); }
-            else if (t < 2 && !t2) { t2 = true; LeanTween.scale(gameObject, Vector2.one * 2, 0.4f); } //SoundManager.instance.PlayClip(ticktockClip, source, true, 1, 5); }
+            else if (t < 2 && !t2) { t2 = true; LeanTween.scale(gameObject, Vector2.one * 2, 0.4f); }
             else if (t < 1 && !t1) { t1 = true; LeanTween.scale(gameObject, Vector2.one * 4, 0.4f); }
         }
     }

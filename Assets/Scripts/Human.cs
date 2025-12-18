@@ -29,7 +29,6 @@ public class Human : MonoBehaviour
     {
         roomHandler = FindAnyObjectByType<RoomHandler>();
         player = FindAnyObjectByType<Player>().gameObject; //use gameobject so that we can destroy player component when dead
-        //torchLight = GetComponentInChildren<Light2D>();
         source = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
 
@@ -126,7 +125,7 @@ public class Human : MonoBehaviour
     private IEnumerator Move(Vector2 dir, string animBool)
     {
         Vector2 startPosition = transform.position;
-        Vector2 endPosition = startPosition + dir; //assumed grid size is 1 [otherwise, use (direction * gridSize) ]
+        Vector2 endPosition = startPosition + dir;
 
         if (!roomHandler.isWithinRoom(endPosition, roomHandler.activeRoom))
         {

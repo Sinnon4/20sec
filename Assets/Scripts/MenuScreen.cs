@@ -21,4 +21,9 @@ public class MenuScreen : MonoBehaviour
         buttons.SetActive(true);
         infoScreen.SetActive(false);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

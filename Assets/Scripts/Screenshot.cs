@@ -7,7 +7,7 @@ public class Screenshot : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-        { // capture screen shot on left mouse button down
+        {
 
             string folderPath = "C:\\Users\\cchel\\20sec\\Screenshots"; // the path of your project folder
 
@@ -17,9 +17,9 @@ public class Screenshot : MonoBehaviour
             var screenshotName =
                                     "Screenshot_" +
                                     System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + // puts the current time right into the screenshot name
-                                    ".png"; // put youre favorite data format here
+                                    ".png";
             ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(folderPath, screenshotName), 2); // takes the sceenshot, the "2" is for the scaled resolution, you can put this to 600 but it will take really long to scale the image up
-            Debug.Log(folderPath + screenshotName); // You get instant feedback in the console
+            Debug.Log(folderPath + screenshotName);
         }
     }
 }

@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class RoomHandler : MonoBehaviour
 {
@@ -17,18 +14,21 @@ public class RoomHandler : MonoBehaviour
 
     [Header("Game Options")]
     [SerializeField] public bool enableTimer;
-    [SerializeField] public bool enableDeath, enableLogs;
+    [SerializeField] public bool
+        enableDeath,
+        enableCheats,
+        enableLogs;
 
     [Header("Rooms")]
     [SerializeField] public RoomTiles[] rooms;
     /* 0 - Back Yard
      * 1 - Front Yard
      * 2 - Living Room
-     * 3 - Kitchen
-     * 4 - Bedroom 1
-     * 5 - Bedroom 2
-     * 6 - Bunker
-     * 7 - Secret Room */
+     * 3 - Bathroom
+     * 4 - Kitchen
+     * 5 - Bedroom
+     * 6 - Garage
+     * 7 - Attic */
     public int activeRoom;
     public List<GameObject> doors = new();
     [SerializeField][Range(4, 12)] int minRoomSize;
@@ -66,8 +66,8 @@ public class RoomHandler : MonoBehaviour
     [Space][Space]
     public bool isDead;
     public bool pendingRound;
+    public bool canMove;
     [SerializeField] GameObject gameOver;
-    TextMeshProUGUI gameOverText;
     [SerializeField] GameObject UFO, lightPole, fastForward;
 
     [Header("UFO vectors")]
@@ -86,7 +86,7 @@ public class RoomHandler : MonoBehaviour
 
     [Space][Space]
     public bool started;
-    [SerializeField] GameObject background, startScreenBlack, startScreen;
+    [SerializeField] GameObject background, startScreenBlack, startScreen, controls;
     [SerializeField] float startScreenFadeTime = 5;
 
     [Header("Buttons")]
@@ -140,12 +140,11 @@ public class RoomHandler : MonoBehaviour
         dLog = FindAnyObjectByType<DialogueHandler>();
         source = GetComponent<AudioSource>();
 
-        gameOverText = gameOver.GetComponentInChildren<TextMeshProUGUI>();
-
         activeRoom = 0; //BackYard
 
         cowText.gameObject.SetActive(true);
         minimap.gameObject.SetActive(true);
+        controls.SetActive(true);
 
         randRoomAndDoors();
         background.SetActive(true);
@@ -178,6 +177,7 @@ public class RoomHandler : MonoBehaviour
     void Update()
     {
         if (!started && Input.anyKeyDown) startGame();
+        else if (!canMove && Input.anyKeyDown) canMove = true; //stop timer from running immediately
         else if (started && !paused)
         {
             if (alienAudioPlaying && Time.timeSinceLevelLoad - alien_t > alienAudioTime) { UFO.GetComponent<AudioSource>().Stop(); alienAudioPlaying = false; }
@@ -198,15 +198,16 @@ public class RoomHandler : MonoBehaviour
             }
 
             if (!paused && Input.GetKeyDown(KeyCode.Space) && !isDead && !pendingRound) { Pause(); }
-            else if (paused && Input.GetKeyDown(KeyCode.Space)) { Continue(); } //take out?
 
             if (Input.GetKeyDown(KeyCode.R)) { Restart(); } //reload
 
             if (Input.GetKeyDown(KeyCode.Escape)) { Quit(); } //close game
 
-            //if (Input.GetKeyDown(KeyCode.T)) { WinGame(); } //instant win
-
-            //if (Input.GetKeyDown(KeyCode.Y)) { foreach (Light2D light in allLights) light.enabled = false; } //turn lights on
+            if (enableCheats)
+            {
+                if (Input.GetKeyDown(KeyCode.T)) { WinGame(); } //instant win
+                if (Input.GetKeyDown(KeyCode.Y)) { foreach (Light2D light in allLights) light.enabled = false; } //turn lights on
+            }
 
             if (!isDead && player.hasCow && activeRoom == 0 && player.transform.position.y == activeBorder1.y - 0.5f) WinGame(); //top of BackYard
             else
@@ -218,6 +219,7 @@ public class RoomHandler : MonoBehaviour
     void startGame()
     {
         started = true;
+        canMove = true;
         pauseButton.SetActive(true);
         SoundManager.instance.PlayClip(alienStartClip, UFO.GetComponent<AudioSource>());
         alienAudioPlaying = true;
@@ -226,6 +228,7 @@ public class RoomHandler : MonoBehaviour
         cowText.transform.LeanScale(Vector3.one, 1);
         minimap.transform.LeanMoveLocal(new Vector2(-660, -366), 1);
         minimap.transform.LeanScale(Vector3.one, 1);
+        controls.SetActive(false);
 
         randPrompt = dLog.insertText(startGamePrompts, startGameColors);
     }
@@ -239,8 +242,8 @@ public class RoomHandler : MonoBehaviour
 
     void randRoomAndDoors()
     {
-        /* randomise the room size for each room, using 6 as a minimum width and height.
-           uses + 1 on second parameter due to max exclusive */
+        /* Randomise the room size for each room.
+           Uses + 1 on second parameter due to max exclusive */
         for (int i = 0; i < rooms.Length; i++)
         {
             if (i < 2) roomHeight = Random.Range(3, Mathf.Max(4, maxRoomSize - 1)); //make FrontYard & BackYard small
@@ -270,7 +273,7 @@ public class RoomHandler : MonoBehaviour
 
         //set player spawn point to somewhere in middle of the room
         playX = Random.Range((int)(activeBorder1.x + 1.5f), (int)(activeBorder2.x - 0.5f)); //max exclusive
-        playY = (int)(activeBorder1.y - 0.5f); //make player spawn along top fince line in BackYard
+        playY = (int)(activeBorder1.y - 0.5f); //make player spawn along top fence line in BackYard
         player.transform.position = new Vector2(playX, playY);
     }
 
@@ -278,7 +281,6 @@ public class RoomHandler : MonoBehaviour
     {
         roomBorders.Clear();
         
-        //exclude BackYard -- no
         for (int i = 0; i < rooms.Length; i++)
         {
             //delete all except base tiles
@@ -317,7 +319,7 @@ public class RoomHandler : MonoBehaviour
 
     public void updateActiveRoom(Vector2 pos)
     {
-        //check each rooms borders to see which room the player is in and then activate that room and deactivate the previous one
+        //check each rooms borders to see which room the player is in and then activate that room
         for (int i = 0; i < rooms.Length; i++)
         {
             if (isWithinRoom(pos,i)) roomNo = i;
@@ -352,7 +354,6 @@ public class RoomHandler : MonoBehaviour
         timer.ResetTimer();
         cows++;
         cowCount.text = $"Specimens Acquired: {cows.ToString()}";
-        //randPrompt = dLog.insertText(startGamePrompts, startGameColors);
 
         if (humanHideRound == cows)
         {
@@ -382,7 +383,7 @@ public class RoomHandler : MonoBehaviour
             {
                 while (checkTiles("Item", rnd))
                 {
-                    if (n > 20) { if (enableLogs) { Debug.Log($"<color=orange>No space for item placement in {activeRoom}"); } break; }
+                    if (n == 20) { if (enableLogs) { Debug.Log($"<color=orange>No space for item placement in {activeRoom}"); } break; }
                     n++;
                     rnd = randz(i, true);
                 }
@@ -416,22 +417,22 @@ public class RoomHandler : MonoBehaviour
         {
             //relocate human into random room
             hPrevRooms[h] = hRooms[h];
-            if (cows == 0) hRooms[h] = h+3; //first round
+            if (cows == 0) hRooms[h] = h+3; //put humans in other rooms for first round
             else
             {
                 /* 0 - Back Yard
                  * 1 - Front Yard
                  * 2 - Living Room
-                 * 3 - Kitchen
-                 * 4 - Bedroom 1
-                 * 5 - Bedroom 2
-                 * 6 - Bunker
-                 * 7 - Secret Room */
+                 * 3 - Bathroom
+                 * 4 - Kitchen
+                 * 5 - Bedroom
+                 * 6 - Garage
+                 * 7 - Attic */
                 if (cowRoom < 4) max = 6;
                 else if (cowRoom == 4 || cowRoom == 5) max = 5;
                 else if (cowRoom > 5) max = 7;
                 
-                while (hRooms[h] == hPrevRooms[h]) { hRooms[h] = Random.Range(2, max); } //exclude FrontYard
+                while (hRooms[h] == hPrevRooms[h]) { hRooms[h] = Random.Range(2, max); } //exclude FrontYard & BackYard
             }
             humans[h].transform.position = new Vector2(roomBorders[hRooms[h]][0], roomBorders[hRooms[h]][3]); //top left of room
             humans[h].room = rooms[hRooms[h]].gameObject;
@@ -463,7 +464,7 @@ public class RoomHandler : MonoBehaviour
     {
         float distAway;
 
-        //cow cannot spawn on an item or within 2 tiles of doors
+        //cow cannot spawn on an item or within 1 tiles of doors
         if (type == "Cow")
         {
             foreach (GameObject item_ in items)
@@ -480,7 +481,7 @@ public class RoomHandler : MonoBehaviour
             }
         }
 
-        //human cannot spawn on an item or within 4 tiles of player when entering same room
+        //human cannot spawn on an item or within 2 tiles of player when entering same room
         else if (type == "Human")
         {
             foreach (GameObject item_ in items)
@@ -566,7 +567,6 @@ public class RoomHandler : MonoBehaviour
     {
         if (!isDead)
         {
-            print("<color=yellow>Cow acquired");
             if (Random.value < 0.5f) SoundManager.instance.PlayClip(grabCowClip1, rooms[activeRoom].source);
             else SoundManager.instance.PlayClip(grabCowClip2, rooms[activeRoom].source);
             Destroy(activeCow);
@@ -583,7 +583,6 @@ public class RoomHandler : MonoBehaviour
     {
         if (hideHuman) hideHuman = false;
 
-        print("<color=green>Woohoo!");
         player.hasCow = false;
         foreach (GameObject bar in minimap.flashBars) bar.SetActive(false);
         check = false;
@@ -620,7 +619,6 @@ public class RoomHandler : MonoBehaviour
         foreach (Light2D light in allLights) light.enabled = false;
         foreach (GameObject bar in minimap.flashBars) bar.SetActive(false);
 
-        print("<color=red>Loser...");
         pauseButton.SetActive(false);
         buttons.transform.localPosition = new Vector2(0, -400);
         buttons.SetActive(true);
@@ -634,6 +632,7 @@ public class RoomHandler : MonoBehaviour
 
     IEnumerator Abduct(bool bottomOfMap = false)
     {
+        canMove = false;
         pendingRound = true;
         fastForward.SetActive(true);
         pauseButton.SetActive(false);

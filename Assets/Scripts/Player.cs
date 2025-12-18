@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         pass = false;
 
         Vector2 startPosition = transform.position;
-        Vector2 endPosition = startPosition + direction; //assumed grid size is 1 [otherwise, use (direction * gridSize) ]
+        Vector2 endPosition = startPosition + direction;
 
         if (!roomHandler.isWithinRoom(endPosition, roomHandler.activeRoom))
         {
@@ -124,13 +124,27 @@ public class Player : MonoBehaviour
         if (pass == true)
         {
             DoorPath dp = roomHandler.doors[doorNo].GetComponent<DoorPath>();
-            if (dp.destination == null) { print("<color=yellow>Locked! :O"); transform.position = startPosition; }
-            else if (dp.xDir == 1) transform.position = dp.destination.transform.position + Vector3.right;
-            else if (dp.xDir == -1) transform.position = dp.destination.transform.position + Vector3.left;
-            else if (dp.yDir == 1) transform.position = dp.destination.transform.position + Vector3.up;
-            else if (dp.yDir == -1) transform.position = dp.destination.transform.position + Vector3.down;
 
-            roomHandler.updateActiveRoom(transform.position);
+            if (dp.xDir == 1)
+            {
+                transform.position = dp.destination.transform.position;
+                roomHandler.updateActiveRoom(transform.position + Vector3.right);
+            }
+            else if (dp.xDir == -1)
+            {
+                transform.position = dp.destination.transform.position;
+                roomHandler.updateActiveRoom(transform.position + Vector3.left);
+            }
+            else if (dp.yDir == 1)
+            {
+                transform.position = dp.destination.transform.position;
+                roomHandler.updateActiveRoom(transform.position + Vector3.up);
+            }
+            else if (dp.yDir == -1)
+            {
+                transform.position = dp.destination.transform.position;
+                roomHandler.updateActiveRoom(transform.position + Vector3.down);
+            }
         }
         else if (endPosition == roomHandler.cowPos)
         {
@@ -151,7 +165,7 @@ public class Player : MonoBehaviour
         //}
 
         isMoving = false;
-        source.Stop(); //check if messes with opening door sound
+        source.Stop();
     }
 
     public void torchOff()

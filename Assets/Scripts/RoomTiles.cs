@@ -34,6 +34,7 @@ public class RoomTiles : MonoBehaviour
                     newY = (int)gameObject.transform.position.y - j; //use minus as y is going down from top left
                     tiles.Add(Instantiate(base_, new Vector2(newX, newY), Quaternion.identity, gameObject.transform));
                     SpriteRenderer tile = tiles[tiles.Count - 1].GetComponent<SpriteRenderer>();
+
                     //update sprites as per position in room - noting top left already accounted for
                     if (j == -1) { tile.sprite = wall; tile.name = "Wall"; }
                     else tile.sprite = floor; tile.name = "Floor";
